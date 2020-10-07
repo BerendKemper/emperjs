@@ -6,7 +6,8 @@ let app = new App(http);
 // console.log(app.requestDataParsers);
 app.listen(8080);
 app.get("/", (request, response) => {
-	console.log(request.api)
+	console.log(request.socket.server);
+	console.log(Object.getOwnPropertyDescriptors(request.socket.server._events.connection[0].prototype));
 	response.bye("IT WORKED AHAHAHA");
 });
 app.get("/test/:mongol/test", (request, response) => {
