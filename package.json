@@ -1,23 +1,24 @@
 {
-  "name": "framework",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BerendKemper/framework.git"
-  },
-  "keywords": [],
-  "author": "Burnitant (https://www.npmjs.com/~burndkemper)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BerendKemper/framework/issues"
-  },
-  "homepage": "https://github.com/BerendKemper/framework#readme"
+	"name": "framework",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"directories": {
+		"lib": "lib"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/BerendKemper/framework.git"
+	},
+	"keywords": [],
+	"author": {
+		"name": "Berend Kemper",
+		"email": "berend_kemper@hotmail.com",
+		"npmjs": "https://www.npmjs.com/~burndkemper"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/BerendKemper/framework/issues"
+	},
+	"homepage": "https://github.com/BerendKemper/framework#readme"
 }
