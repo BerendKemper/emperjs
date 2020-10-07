@@ -3,28 +3,54 @@ const http = require("http"); // console.log(http.STATUS_CODES); console.log(htt
 const App = require("./lib/app");
 
 let app = new App(http);
+// console.log(app.requestDataParsers);
 app.listen(8080);
 app.get("/", (request, response) => {
+	console.log(request.api)
+	response.bye("IT WORKED AHAHAHA");
+});
+app.get("/test/:mongol/test", (request, response) => {
+	console.log(request.api)
+	response.bye("IT WORKED! AHAHAHA params.mongol = " + request.params.mongol);
+});
+app.get("/test/:monkey", (request, response) => {
 
 });
-app.get("/v1/tickets/guidion", (request, response) => {
+app.put("/test/:monk/notzen", (request, response) => {
 
 });
-app.get("/v1/tickets/:id/guidion", (request, response) => {
-
-});
-app.put("/v1/tickets/:id/guidion", (request, response) => {
-
-});
-console.log("routes:", app.routes);
+// console.log("routes:", app.routes);
 
 // console.log(new URL("/"));
 // console.log(new URL("/test/:id/aap"));
 // console.log(new URL("/mongol/"));
 
 
+
 /*
 const createWebApp = await async function loadWebApp() {
+	const dataParsers = Object.defineProperties({}, {
+		'application/json': {
+			value(data) {
+				try {
+					return JSON.parse(data);
+				} catch (e) {
+					throw new Exception(400, "Data was not in JSON format");
+				}
+			}
+		},
+		'application/x-www-form-urlencoded': {
+			value(data) {
+				try {
+					return _querystring.decode(data);
+				}
+				catch (e) {
+					throw new Exception(400, "Data was not in querystring format");
+				}
+			}
+		},
+	});
+
 	const webApp = await async function request(request, response) {
 		return new Promise((resolve, reject) => {
 			let data = [];
@@ -37,13 +63,12 @@ const createWebApp = await async function loadWebApp() {
 						data = {};
 					else {
 						const dataParser = dataParsers[headers['content-type']];
-						if (!dataParser)
-							throw new Error("content-type not supported");
+						if (!dataParser) throw new Error("content-type not supported");
 						data = dataParser(Buffer.concat(data).toString());
 					}
 					request.body = data;
 					return routes.handle(request, response);
-				} catch (error) {
+				} catch(error) {
 					if (error instanceof Exception)
 						error.handle(response);
 					else
@@ -52,7 +77,7 @@ const createWebApp = await async function loadWebApp() {
 			};
 			if (request instanceof _http.IncomingMessage) {
 				request.on("data", chunk => data.push(chunk));
-				request.on("s", () => resolve(doRequest()));
+				request.on("end", () => resolve(doRequest()));
 			}
 			else
 				resolve(doRequest());
@@ -60,7 +85,7 @@ const createWebApp = await async function loadWebApp() {
 	};
 	const routes = function loadRoutes() {
 		const separate = uri => {
-			const [, ...combo] = uri.split("/");
+			const [ nothing, ...combo ] = uri.split("/");
 			return combo;
 		};
 		const routes = {};
@@ -131,7 +156,7 @@ const createWebApp = await async function loadWebApp() {
 							const route = router.find(routes);
 							const method = route[request.method];
 							return method(request, response);
-						} catch (error) {
+						} catch(error) {
 							if (error instanceof Exception)
 								error.handle(response);
 							else
@@ -162,18 +187,16 @@ const createWebApp = await async function loadWebApp() {
 	}();
 	const apiJSON = await new FileJSON("temp/api.json");
 	const tabs22 = new IndentModel({ spaces: 22 });
-	class ApiJSON {
-		constructor(method, uri) {
-			const fullUri = method + " " + uri;
-			if (apiJSON[fullUri] === undefined)
-				apiJSON[fullUri] = { counter: 0, bytes: 0 };
-			apiJSON[fullUri] = Object.assign(this, apiJSON[fullUri]);
-			return this;
-		}
-		toFormat() {
-			return tabs22.tabify("counter: " + dotNumNotation(this.counter),
-				"bytes: " + e3sBytesNotation(this.bytes));
-		}
+	const ApiJSON = function ApiJSON(method, uri) {
+		const fullUri = method + " " + uri;
+		if(apiJSON[fullUri] === undefined)
+			apiJSON[fullUri] = { counter: 0, bytes: 0 };
+		apiJSON[fullUri] = Object.setPrototypeOf(apiJSON[fullUri], ApiJSON.prototype);
+		return apiJSON[fullUri];
+	};
+	ApiJSON.prototype.toFormat = function toFormat() {
+		return tabs22.tabify("counter: " + dotNumNotation(this.counter),
+			"bytes: " + e3sBytesNotation(this.bytes));
 	};
 	const prototypeApiJSON = ApiJSON.prototype;
 	const get = (uri, callback) => {
@@ -218,7 +241,7 @@ const createWebApp = await async function loadWebApp() {
 					}
 					else {
 						print += "\n" + spaces + "/" + label.replace("/", ":");
-						subRoutes(spaces + "    ", subRoute);
+							subRoutes(spaces + "    ", subRoute);
 					}
 				}
 			}("", routes()));
@@ -235,7 +258,7 @@ const createWebApp = await async function loadWebApp() {
 	});
 	return () => webApp;
 }();
+
 const app = createWebApp();
-//*/
 
-
+*/
