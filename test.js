@@ -1,4 +1,4 @@
-fetch("/test", { // No Errors
+fetch("/v1/tracks/test", { // No Errors
 	method: "PUT",
 	headers: { "content-type": "application/json" },
 	body: JSON.stringify({ a: 5 })
@@ -9,7 +9,7 @@ fetch("/test", { // No Errors
 	console.log(result);
 });
 
-fetch("/test", {
+fetch("/v1/tracks/test", {
 	method: "PUT",
 	headers: { "content-type": "appliication/json" }, // Error! apli- i -cation/json
 	body: JSON.stringify({ a: 5 })
@@ -20,7 +20,7 @@ fetch("/test", {
 	console.log(result);
 });
 
-fetch("/test", {
+fetch("/v1/tracks/test", {
 	method: "PUT",
 	headers: { "content-type": "application/json" },
 	body: "JSON.stringify({ a: 5 })" // Error! body not JSON while content-type is application/json
