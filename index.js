@@ -5,7 +5,7 @@ const App = require("./lib/app");
 
 let app = new App(http);
 /* console.log(app.requestDataParsers); */
-app.loadApiStats({
+const apiStats = {
 	"/": {
 		"GET": {
 			"counter": 10,
@@ -13,14 +13,16 @@ app.loadApiStats({
 		}
 	},
 	"/v1/tracks/:id": {
-		"GET": {
+		"PUT": {
 			"counter": 15,
 			"bytes": 2500
 		}
 	}
-});
+}
+app.loadApiStats(apiStats);
 app.get("/", (request, response) => {
 	response.send("web page");
+	console.log(apiStats);
 });
 app.get("/v1/artists/:id", (request, response) => {
 	response.send(`looking for artist by ID ${request.params.id}`);
