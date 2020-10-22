@@ -12,7 +12,7 @@ app.loadApiStats({
 			"bytes": 500
 		}
 	},
-	"/test/:mongol/test": {
+	"/v1/tracks/:id": {
 		"GET": {
 			"counter": 15,
 			"bytes": 2500
