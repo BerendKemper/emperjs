@@ -1,7 +1,7 @@
 "use strict";
 const http = require("http");
-/* console.log(http.STATUS_CODES); console.log(http.METHODS); */
 const App = require("./lib/app");
+
 
 let app = new App(http);
 /* console.log(app.requestDataParsers); */
@@ -20,18 +20,30 @@ app.loadApiStats({
 	}
 });
 app.get("/", (request, response) => {
-	response.bye("IT WORKED AHAHAHA");
-	console.log(request.stats);
+	response.send("web page");
 });
-app.get("/test/:mongol/test", (request, response) => {
-	response.bye("IT WORKED! AHAHAHA params.mongol = " + request.params.mongol);
-	console.log(request.stats);
-	request.stats.counter++;
+app.get("/v1/artists/:id", (request, response) => {
+	response.send(`looking for artist by ID ${request.params.id}`);
+	console.log(response.stats);
 });
-app.get("/test/:monkey", (request, response) => {
-	response.bye("IT WORKED AHAHAHA");
+app.get("/v1/album/:id", (request, response) => {
+	response.send(`looking for album by ID ${request.params.id}`);
+	console.log(response.stats);
 });
-app.put("/test/:monk/notzen", (request, response) => {
-	response.bye("IT WORKED AHAHAHA");
+app.get("/v1/tracks/:id", (request, response) => {
+	response.send(`looking for track by ID ${request.params.id}`);
+	console.log(response.stats);
+});
+app.put("/v1/tracks/:id", (request, response) => {
+	response.send(`changing data ${JSON.stringify(request.data)} from a track by the ID ${request.params.id}`);
+	console.log(response.stats)
+});
+app.get("/v1/users/:id", (request, response) => {
+	response.send(`looking for user by ID ${request.params.id}`);
+	console.log(response.stats)
+});
+app.get("/v1/playlists/:id", (request, response) => {
+	response.send(`looking for playlist by ID ${request.params.id}`);
+	console.log(response.stats);
 });
 app.listen(8080);
