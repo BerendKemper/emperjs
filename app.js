@@ -6,12 +6,13 @@ const Request = require("framework/lib/request");
 const Response = require("framework/lib/response");
 const RequestDataParsers = require("framework/lib/dataParser");
 const ApiRegister = require("framework/lib/apiRegister");
-const isParent = require("framework/lib/isParent");
+const isDerived = require("framework/lib/isDerived");
 const { serverKey } = require("./lib/accessKeys");
 class App {
 	#server;
 	#apiRegister = new App.#ApiRegister();
-	/**@param {String} protocol
+	/**
+	 * @param {String} protocol
 	 * @param {Object} options
 	 * @param {Object} options.logger
 	 * @param {Function} options.logger.log
@@ -111,7 +112,8 @@ class App {
 		return App.#IncomingMessage;
 	};
 	static set IncomingMessage(IncomingMessage) {
-		isParent(IncomingMessage, Request);
+		if (!isDerived(IncomingMessage, Request))
+			throw TypeError(`The parameter IncomingMessage is not a child of Request`);
 		App.#IncomingMessage = IncomingMessage;
 	};
 	static #ServerResponse = Response;
@@ -119,7 +121,8 @@ class App {
 		return App.#ServerResponse;
 	};
 	static set ServerResponse(ServerResponse) {
-		isParent(ServerResponse, Response);
+		if (!isDerived(ServerResponse, Response))
+			throw TypeError(`The parameter ServerResponse is not a child of Response`);
 		App.#ServerResponse = ServerResponse;
 	};
 	static #ApiRegister = ApiRegister;
@@ -127,7 +130,8 @@ class App {
 		return App.#ApiRegister;
 	};
 	static set ApiRegister(OwnApiRegister) {
-		isParent(OwnApiRegister, ApiRegister);
+		if (!isDerived(OwnApiRegister, ApiRegister))
+			throw TypeError(`The parameter OwnApiRegister is not a child of ApiRegister`);
 		App.#ApiRegister = OwnApiRegister;
 	};
 };
