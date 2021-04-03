@@ -6,7 +6,7 @@ const Request = require("framework/lib/request");
 const Response = require("framework/lib/response");
 const RequestDataParsers = require("framework/lib/dataParser");
 const ApiRegister = require("framework/lib/apiRegister");
-const isDerived = require("framework/lib/isDerived");
+const isDerived = require("is-derived");
 const { serverKey } = require("./lib/accessKeys");
 class App {
 	#server;
