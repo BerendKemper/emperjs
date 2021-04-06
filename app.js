@@ -50,7 +50,7 @@ class App {
 		if (route.GET)
 			throw new Error(`There is already an API at GET ${path}`);
 		route.GET = callback;
-		callback.record = this.#apiRegister.register(path, "GET");
+		callback.apiRecord = this.#apiRegister.register(path, "GET");
 	};
 	/**@param {String} path 
 	 * @param {Function} callback */
@@ -61,7 +61,7 @@ class App {
 		if (route.POST)
 			throw new Error(`There is already an API at POST ${path}`);
 		route.POST = callback;
-		callback.record = this.#apiRegister.register(path, "POST");
+		callback.apiRecord = this.#apiRegister.register(path, "POST");
 	};
 	/**@param {String} path 
 	 * @param {Function} callback */
@@ -72,7 +72,7 @@ class App {
 		if (route.PUT)
 			throw new Error(`There is already an API at PUT ${path}`);
 		route.PUT = callback;
-		callback.record = this.#apiRegister.register(path, "PUT");
+		callback.apiRecord = this.#apiRegister.register(path, "PUT");
 	};
 	/**@param {String} path 
 	 * @param {Function} callback */
@@ -83,7 +83,7 @@ class App {
 		if (route.DELETE)
 			throw new Error(`There is already an API at DELETE ${path}`);
 		route.DELETE = callback;
-		callback.record = this.#apiRegister.register(path, "DELETE");
+		callback.apiRecord = this.#apiRegister.register(path, "DELETE");
 	};
 	loadApiRegister(register, reset) {
 		if (typeof register !== "object" || Array.isArray(register))
