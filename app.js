@@ -1,13 +1,15 @@
 "use strict";
 const http = require("http");
 const https = require("https");
+const isDerived = require("is-derived");
 const { HttpServer, HttpsServer } = require("framework/lib/server");
 const Request = require("framework/lib/request");
 const Response = require("framework/lib/response");
 const RequestDataParsers = require("framework/lib/dataParser");
 const ApiRegister = require("framework/lib/apiRegister");
-const isDerived = require("is-derived");
-const { serverKey } = require("./lib/accessKeys");
+const { serverKey } = require("framework/lib/accessKeys");
+const _mimetypes = require("./lib/fileTransfer");
+const { isObject } = require("framework/lib/common");
 class App {
 	#server;
 	#apiRegister = new App.#ApiRegister();
@@ -18,8 +20,7 @@ class App {
 	 * @param {Function} options.logger.log
 	 * @param {Function} options.logger.error */
 	constructor(protocol, options = {}) {
-		if (!(typeof options === "object" && options instanceof Array === false))
-			throw new TypeError("Options must be an Object");
+		isObject(options);
 		if (protocol === http || protocol === "http")
 			this.#server = new HttpServer(App.#serverOptions);
 		else if (protocol === https || protocol === "https")
@@ -86,8 +87,7 @@ class App {
 		callback.apiRecord = this.#apiRegister.register(path, "DELETE");
 	};
 	loadApiRegister(register, reset) {
-		if (typeof register !== "object" || Array.isArray(register))
-			throw new TypeError("register is not an object");
+		isObject(register);
 		const apis = this.#apiRegister.apis();
 		for (const path in apis) {
 			const api = apis[path];
@@ -106,7 +106,7 @@ class App {
 	};
 	static get #serverOptions() {
 		return { IncomingMessage: App.#IncomingMessage, ServerResponse: App.#ServerResponse };
-	}
+	};
 	static #IncomingMessage = Request;
 	static get IncomingMessage() {
 		return App.#IncomingMessage;
@@ -133,6 +133,14 @@ class App {
 		if (!isDerived(OwnApiRegister, ApiRegister))
 			throw TypeError(`The parameter OwnApiRegister is not a child of ApiRegister`);
 		App.#ApiRegister = OwnApiRegister;
+	};
+	static get mimetypes() {
+		return _mimetypes;
+	};
+	static set mimetypes(mimetypes) {
+		isObject(mimetypes);
+		for (const type in mimetypes)
+			_mimetypes[type] = mimetypes[type];
 	};
 };
 const requestDataParser = Request.dataParsers = new RequestDataParsers();
