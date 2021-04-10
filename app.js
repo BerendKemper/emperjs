@@ -30,7 +30,7 @@ class App {
 		const { logger: { log = console.log, error = console.error } = {} } = options;
 		this.#server.error = error;
 		this.#server.log = log;
-		this.#server.app = this;
+		// this.#server.app = this; // not really sure if necessary
 		this.#server.initialise(serverKey);
 	};
 	/**
@@ -86,19 +86,28 @@ class App {
 		route.DELETE = callback;
 		callback.apiRecord = this.#apiRegister.register(path, "DELETE");
 	};
+	/**
+	 * 
+	 * @param {Object} register 
+	 * @param {Boolean} reset 
+	 */
 	loadApiRegister(register, reset) {
 		isObject(register);
-		const apis = this.#apiRegister.apis();
+		const apis = this.#apiRegister.apis;
 		for (const path in apis) {
 			const api = apis[path];
+			const loadingApi = register[path];
 			register[path] = api;
 			if (reset === true)
 				for (const method in api)
 					api[method].reset();
+			else if (loadingApi)
+				for (const method in api)
+					api[method].from(loadingApi[method]);
 		}
 		this.#apiRegister = new App.#ApiRegister(register);
 	};
-	get registeredApis() {
+	get apis() {
 		return this.#apiRegister.apis;
 	};
 	get requestDataParser() {
