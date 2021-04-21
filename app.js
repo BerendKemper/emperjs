@@ -115,8 +115,10 @@ class App {
 		return App.#IncomingMessage;
 	};
 	static set IncomingMessage(IncomingMessage) {
-		if (!isDerived(IncomingMessage, Request))
-			throw TypeError(`The parameter IncomingMessage is not a child of Request`);
+		if (IncomingMessage === null)
+			App.#IncomingMessage = Request;
+		else if (!isDerived(IncomingMessage, Request))
+			throw TypeError(`The parameter IncomingMessage is not derived from Request`);
 		App.#IncomingMessage = IncomingMessage;
 	};
 	//
@@ -125,7 +127,9 @@ class App {
 		return App.#ServerResponse;
 	};
 	static set ServerResponse(ServerResponse) {
-		if (!isDerived(ServerResponse, Response))
+		if (ServerResponse === null)
+			App.#ServerResponse = Response;
+		else if (!isDerived(ServerResponse, Response))
 			throw TypeError(`The parameter ServerResponse is not a child of Response`);
 		App.#ServerResponse = ServerResponse;
 	};
@@ -136,7 +140,9 @@ class App {
 		return App.#ApiRegister;
 	};
 	static set ApiRegister(OwnApiRegister) {
-		if (!isDerived(OwnApiRegister, ApiRegister))
+		if (OwnApiRegister === null)
+			App.#ApiRegister = ApiRegister;
+		else if (!isDerived(OwnApiRegister, ApiRegister))
 			throw TypeError(`The parameter OwnApiRegister is not a child of ApiRegister`);
 		App.#ApiRegister = OwnApiRegister;
 	};
