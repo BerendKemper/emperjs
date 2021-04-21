@@ -1,15 +1,12 @@
 "use strict";
-const http = require("http");
-const https = require("https");
-const isDerived = require("is-derived");
 const { HttpServer, HttpsServer } = require("./lib/server");
 const Request = require("./lib/request");
 const Response = require("./lib/response");
-const RequestDataParsers = require("./lib/dataParser");
 const ApiRegister = require("./lib/apiRegister");
-const { serverKey } = require("./lib/accessKeys");
-const _mimetypes = require("./lib/fileTransfer");
+const isDerived = require("is-derived");
 const { isObject } = require("./lib/common");
+const logger = require("./lib/logger");
+const _mimetypes = require("./lib/fileTransfer");
 class App {
 	#server;
 	#apiRegister = new App.#ApiRegister();
@@ -21,26 +18,23 @@ class App {
 	 * @param {Function} options.logger.error */
 	constructor(protocol, options = {}) {
 		isObject(options);
-		if (protocol === http || protocol === "http")
+		if (protocol === "http")
 			this.#server = new HttpServer(App.#serverOptions);
-		else if (protocol === https || protocol === "https")
+		else if (protocol === "https")
 			this.#server = new HttpsServer(App.#serverOptions);
 		else
 			throw new TypeError("Protocol must be http or https");
-		const { logger: { log = console.log, error = console.error } = {} } = options;
-		this.#server.error = error;
-		this.#server.log = log;
-		// this.#server.app = this; // not really sure if necessary
-		this.#server.initialise(serverKey);
+		this.#server.initialize();
 	};
 	/**
-	 * @param {String} port 
-	 * @param {String} hostname 
-	 * @param {Number} backlog 
-	 * @param {Function} listeningListener */
-	listen(port = 8080, hostname = "127.0.0.1", backlog, listeningListener) {
-		this.#server.onListening(serverKey, listeningListener);
-		this.#server.listen(port, hostname, backlog);
+	 * @param {Object} options
+	 * @param {String} options.port 
+	 * @param {String} options.hostname 
+	 * @param {Function} options.listeningListener
+	 **/
+	listen(options = {}) {
+		const { port, hostname, listeningListener } = options;
+		this.#server.listen(port, hostname, listeningListener);
 	};
 	/**@param {String} path 
 	 * @param {Function} callback */
@@ -105,14 +99,14 @@ class App {
 				for (const method in api)
 					api[method].from(loadingApi[method]);
 		}
-		this.#apiRegister = new App.#ApiRegister(register);
+		this.#apiRegister.load(register);
 	};
 	get apis() {
 		return this.#apiRegister.apis;
 	};
-	get requestDataParser() {
-		return requestDataParser;
-	};
+
+	// static
+	// server options
 	static get #serverOptions() {
 		return { IncomingMessage: App.#IncomingMessage, ServerResponse: App.#ServerResponse };
 	};
@@ -125,6 +119,7 @@ class App {
 			throw TypeError(`The parameter IncomingMessage is not a child of Request`);
 		App.#IncomingMessage = IncomingMessage;
 	};
+	//
 	static #ServerResponse = Response;
 	static get ServerResponse() {
 		return App.#ServerResponse;
@@ -134,6 +129,8 @@ class App {
 			throw TypeError(`The parameter ServerResponse is not a child of Response`);
 		App.#ServerResponse = ServerResponse;
 	};
+	//
+	// api register
 	static #ApiRegister = ApiRegister;
 	static get ApiRegister() {
 		return App.#ApiRegister;
@@ -143,6 +140,13 @@ class App {
 			throw TypeError(`The parameter OwnApiRegister is not a child of ApiRegister`);
 		App.#ApiRegister = OwnApiRegister;
 	};
+	//
+	// logger
+	static get logger() {
+		return logger;
+	};
+	//
+	// logger
 	static get mimetypes() {
 		return _mimetypes;
 	};
@@ -152,5 +156,4 @@ class App {
 			_mimetypes[type] = mimetypes[type];
 	};
 };
-const requestDataParser = Request.dataParsers = new RequestDataParsers();
 module.exports = App;
