@@ -2,14 +2,14 @@
 const http = require("http");
 const https = require("https");
 const isDerived = require("is-derived");
-const { HttpServer, HttpsServer } = require("framework/lib/server");
-const Request = require("framework/lib/request");
-const Response = require("framework/lib/response");
-const RequestDataParsers = require("framework/lib/dataParser");
-const ApiRegister = require("framework/lib/apiRegister");
-const { serverKey } = require("framework/lib/accessKeys");
+const { HttpServer, HttpsServer } = require("./lib/server");
+const Request = require("./lib/request");
+const Response = require("./lib/response");
+const RequestDataParsers = require("./lib/dataParser");
+const ApiRegister = require("./lib/apiRegister");
+const { serverKey } = require("./lib/accessKeys");
 const _mimetypes = require("./lib/fileTransfer");
-const { isObject } = require("framework/lib/common");
+const { isObject } = require("./lib/common");
 class App {
 	#server;
 	#apiRegister = new App.#ApiRegister();
