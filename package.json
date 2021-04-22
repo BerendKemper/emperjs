@@ -1,6 +1,6 @@
 {
-	"name": "rebend",
-	"version": "1.0.0",
+	"name": "emperjs",
+	"version": "0.0.0",
 	"description": "",
 	"main": "app.js",
 	"directories": {
@@ -8,7 +8,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/BerendKemper/framework.git"
+		"url": "git+https://github.com/BerendKemper/emperjs.git"
 	},
 	"keywords": [],
 	"author": {
@@ -18,9 +18,9 @@
 	},
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/BerendKemper/framework/issues"
+		"url": "https://github.com/BerendKemper/emperjs/issues"
 	},
-	"homepage": "https://github.com/BerendKemper/framework#readme",
+	"homepage": "https://github.com/BerendKemper/emperjs#readme",
 	"dependencies": {
 		"is-derived": "^0.x"
 	}
