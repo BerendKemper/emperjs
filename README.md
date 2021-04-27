@@ -217,6 +217,7 @@ The <code>requestBodyParsers</code> is read from the static property <code>bodyP
 		If an <code>errorMessage</code> is given and the <code>requestBodyParser</code> would fail at parsing an error with this <code>errorMessage</code> is send to the <code>response</code> with the method <code>sendError</code>, otherwise the error thrown by the parser itself is send.
 	</details>
 </ul>
+Use this method to add a new <code>requestBodyParser</code>. On default <code>requestBodyParsers</code> has a <code>requestBodyParser</code> for <code>content-type</code> <code>application/json</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for <code>content-type</code> <code>application/x-www-form-urlencoded</code> that parses with <a href="https://nodejs.org/dist/latest-v14.x/docs/api/querystring.html#querystring_querystring_parse_str_sep_eq_options">querystring.parse</a>.
 
 <h2>Class: <code>RequestBodyParser</code></h2>
 An individual <code>requestBodyParser</code> has a method <code>parse</code> and this is used by the <code>request</code> in order to parse data.
