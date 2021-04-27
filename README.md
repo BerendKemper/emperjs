@@ -195,7 +195,7 @@ Invoke this method to <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.
 Readable property of the endpoint's <code>apiRecord</code>
 
 <h2>Class: <code>RequestBodyParsers</code></h2>
-The <code>requestBodyParsers</code> is read from the static property <code>bodyParsers</code> from the <code>Request</code> class. The <code>requestBodyParsers</code> is map with <code>mimetype</code> as key and a <code>requestBodyParser</code> as value.
+The <code>requestBodyParsers</code> is read from the static property <code>bodyParsers</code> from the <code>Request</code> class. The <code>requestBodyParsers</code> is map with a <code>mimetype</code> as key and a <code>requestBodyParser</code> as value.
 <h3><code>requestBodyParsers.add(mimetype, parse[, errorMessage])</code></h3>
 <ul>
 	<details>
