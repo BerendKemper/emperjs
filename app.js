@@ -11,7 +11,7 @@ let IncomingMessage = Request;
 let ServerResponse = Response;
 class App {
 	#server;
-	#apiRegister = new App.#ApiRegister();
+	#apiRegister = new ApiRegister();
 	/**
 	 * @param {String} protocol
 	 * @param {Object} options
