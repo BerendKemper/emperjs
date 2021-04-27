@@ -6,7 +6,7 @@ const ApiRegister = require("./lib/apiRegister");
 const isDerived = require("is-derived");
 const { isObject } = require("./lib/common");
 const logger = require("./lib/logger");
-const _mimetypes = require("./lib/fileTransfer");
+const _mimetypes = require("./lib/fileTypes");
 class App {
 	#server;
 	#apiRegister = new App.#ApiRegister();
