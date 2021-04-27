@@ -99,24 +99,24 @@ Readable property of the <code>apiRegister</code>'s <code>apis</code> property.
 Static readable and writable property of the <code>server</code>'s <code>IncomingMessage</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>Request</code>.
 <h3><code>App.ServerResponse</code></h3>
 Static readable and writable property of the <code>server</code>'s <code>ServerResponse</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>Response</code>.
-<h3><code>App.ApiRegister</code></h3>
-Static readable and writable property of the <code>App</code>'s <code>ApiRegister</code> class. This property can only be set by a class that is extended at least by the base class.
+<h3><code>App.ApiRecord</code></h3>
+Static readable and writable property of the <code>ApiRegister</code>'s <code>ApiRecord</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>ApiRecord</code>.
 <h3><code>App.logger</code></h3>
 Static readable property of the <code>App</code>'s logger instance.
 <h3><code>App.mimetypes</code></h3>
-Static readable and writable property of the <code>App</code>'s mimetypes. These mimetypes are used at the method <code>response</code>.<code>pipeFile</code> to identify a file's extension with the corresponding mimetype.
+Static readable and writable property of the <code>App</code>'s mimetypes. These mimetypes are used at the method <code>response</code>.<code>sendFile</code> to identify a file's extension with the corresponding mimetype.
 
 <h2>Class: <code>Request</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_incomingmessage">http.IncomingMessage</a></li></ul>
-This object is created internally by the server. It is passed as the first parameter to an endpoint's function. It may be used to access response status, headers and data. The class <code>Request</code> can be read from the <code>App</code>'s static property <code>IncomingMessage</code> of and it can be also be written if the value is a class that was extended from <code>Request</code>.
+This object is created internally by the server. It is passed as the first parameter to an endpoint's function. It may be used to access response status, headers and data. The class <code>Request</code> can be read from the <code>App</code>'s static property <code>IncomingMessage</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Request</code>.
 <h3><code>request.body</code></h3>
-Property where the requests parsed <code>body</code> resides. The <code>body</code> is parsed by an individual <code>bodyParser</code>.
+Property where the requests parsed <code>body</code> resides. The <code>body</code> is parsed by an individual <code>requestBodyParser</code>.
 <h3><code>Request.bodyParsers</code></h3>
-Static readable property of the <code>Request</code>'s <code>bodyParsers</code> instance.
+Static readable property of the <code>Request</code>'s <code>bodyParsers</code> instance. Contains individual <code>requestBodyParser</code>.
 
 <h2>Class: <code>Response</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_serverresponse">http.ServerResponse</a></li></ul>
-This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class <code>Response</code> can be read from the <code>App</code>'s static property <code>ServerResponse</code> of and it can be also be written if the value is a class that was extended from <code>Response</code>.
+This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class <code>Response</code> can be read from the <code>App</code>'s static property <code>ServerResponse</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Response</code>.
 <h3><code>response.sendJson(status, data)</code></h3>
 <ul>
 	<details>
@@ -132,7 +132,7 @@ This object is created internally by the server. It is passed as the second para
 		The <code>data</code> object is stringified by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a>.
 	</details>
 </ul>
-Sends a json object back to the response. This method invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with <code>status</code> and the headers <code>"Content-Type"</code> set to <code>"application/json"</code> and invokes the <code>send</code> method.
+Sends a json object back to the <code>response</code>. This method invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with <code>status</code> and the headers <code>"Content-Type"</code> set to <code>"application/json"</code> and invokes the <code>send</code> method.
 <h3><code>response.send(data)</code></h3>
 <ul>
 	<details>
@@ -181,7 +181,7 @@ Uses the <code>App</code>'s <code>logger.error</code> method to log the <a href=
 		<summary>
 			<code>end</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> Optional
 		</summary>
-		If <code>end</code> is set to <code>false</code> the <code>response</code> is not ended. Use this to chain invoking multiple <code>sendFile</code>s.
+		If <code>end</code> is set to <code>false</code> the <code>response</code> is not ended. Use this to chain invoke multiple <code>sendFile</code>s.
 	</details>
 	<details>
 		<summary>
@@ -190,6 +190,49 @@ Uses the <code>App</code>'s <code>logger.error</code> method to log the <a href=
 		The <code>response</code> is returned to allow chain invoking multiple <code>sendFile</code>s.
 	</details>
 </ul>
-Invoke this method to <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_open_path_flags_mode_callback">open</a> a file for reading, continuously <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback">read</a> and <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_write_chunk_encoding_callback">write</a> chunks the size of <code>16kb</code> from the file to the <code>response</code> until reading reached the end of file which <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a>s the <code>response</code>. Invoking multiple <code>sendFile</code>s in a single <code>request</code> results in the different files to be appended as one file and send in chunks to the <code>response</code>. This is not the same as creating templates of files but it can provide similair results. A <code>CallbackQueue</code> ensures the files are send sequentially.
+Invoke this method to <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_open_path_flags_mode_callback">open</a> a file for reading, continuously <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback">read</a> and <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_write_chunk_encoding_callback">write</a> chunks the size of <code>16kb</code> from the file to the <code>response</code> until reading reached the end of file which <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a>s the <code>response</code>. The <code>content-type</code> in the <code>response</code>'s header are set using <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_setheader_name_value">setHeader</a> with the corresponding <code>mimetype</code> found from the <code>App</code>'s static proeprty <code>mimetypes</code>. If the <code>mimetype</code> was not found the <code>response</code> sends a <code>404</code>. Invoking multiple <code>sendFile</code>s in a single <code>request</code> results in the different files to be appended as one file and send in chunks to the <code>response</code>. This is not the same as creating templates of files but it can provide similair results. Only the first file's <code>mimetype</code> is put in the header <code>content-type</code>. A <code>CallbackQueue</code> ensures the files are send sequentially.
 <h3><code>response.apiRecord</code></h3>
 Readable property of the endpoint's <code>apiRecord</code>
+
+<h2>Class: <code>RequestBodyParsers</code></h2>
+The <code>requestBodyParsers</code> is read from the static property <code>bodyParsers</code> from the <code>Request</code> class. The <code>requestBodyParsers</code> is map with <code>mimetypes</code> as keys and an individual <code>requestBodyParser</code> as value.
+<h3><code>requestBodyParsers.add(mimetype, parse[, errorMessage])</code></h3>
+<ul>
+	<details>
+		<summary>
+			<code>mimetype</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
+		</summary>
+		This <code>requestBodyParser</code> is internally accessed by using the <code>mimetype</code> as key.
+	</details>
+	<details>
+		<summary>
+			<code>parse</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+		</summary>
+		This <code>requestBodyParser</code> uses this <code>parse</code> function in order to parse data from incomming requests and put the parsed data in <code>request</code>.<code>body</code>.
+	</details>
+	<details>
+		<summary>
+			<code>errorMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a> Optional
+		</summary>
+		If an <code>errorMessage</code> is given and the <code>requestBodyParser</code> would fail at parsing an error with this <code>errorMessage</code> is send to the <code>response</code> with the method <code>sendError</code>, otherwise the error thrown by the parser itself is send.
+	</details>
+</ul>
+
+<h2>Class: <code>RequestBodyParser</code></h2>
+An individual <code>requestBodyParser</code> has a method <code>parse</code> and this is used by the <code>request</code> in order to parse data.
+
+<h2>Class: <code>ApiRecord</code></h2>
+Every api created in the <code>App</code> with the CRUD methods <code>get</code>, <code>post</code>, <code>put</code> and <code>delete</code> are stored in the <code>App</code>'s <code>ApiRegister</code> as an <code>ApiRecord</code>. Every <code>apiRecord</code> stores and updates information from the server's endpoints. This class can be read from the <code>App</code>'s static property <code>ApiRecord</code>.
+<h3><code>apiRecord.reset()</code></h3>
+This method sets <code>counter</code> and <code>bytes</code> properties to <code>0</code>.
+<h3><code>apiRecord.counter</code></h3>
+This porperty is used to count the amount of times a request has successfully responded. It does not increment when the <code>response</code>'s <code>sendError</code> method is invoked.
+<h3><code>apiRecord.bytes</code></h3>
+This property is used to update the amount of <code>bytes</code> written from the server to clients.
+
+<h2>Class: <code>Logger</code></h2>
+An instance from this class is exported and required throughout the <code>App</code>'s library. The instance can be read from the <code>App</code>'s static property <code>logger</code>. 
+<h3><code>logger.log</code></h3>
+Readable and writable property for the log function. If set with a value that is not a function an error is thrown.
+<h3><code>logger.error</code></h3>
+Readable and writable property for the error function. If set with a value that is not a function an error is thrown.

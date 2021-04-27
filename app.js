@@ -7,6 +7,8 @@ const isDerived = require("is-derived");
 const { isObject } = require("./lib/common");
 const logger = require("./lib/logger");
 const _mimetypes = require("./lib/fileTypes");
+let IncomingMessage = Request;
+let ServerResponse = Response;
 class App {
 	#server;
 	#apiRegister = new App.#ApiRegister();
@@ -19,9 +21,9 @@ class App {
 	constructor(protocol, options = {}) {
 		isObject(options);
 		if (protocol === "http")
-			this.#server = new HttpServer(App.#serverOptions);
+			this.#server = new HttpServer({ IncomingMessage, ServerResponse });
 		else if (protocol === "https")
-			this.#server = new HttpsServer(App.#serverOptions);
+			this.#server = new HttpsServer({ IncomingMessage, ServerResponse });
 		else
 			throw new TypeError("Protocol must be http or https");
 		this.#server.initialize();
@@ -104,47 +106,36 @@ class App {
 	get apis() {
 		return this.#apiRegister.apis;
 	};
-
-	// static
+	//
 	// server options
-	static get #serverOptions() {
-		return { IncomingMessage: App.#IncomingMessage, ServerResponse: App.#ServerResponse };
-	};
-	static #IncomingMessage = Request;
 	static get IncomingMessage() {
-		return App.#IncomingMessage;
+		return IncomingMessage;
 	};
-	static set IncomingMessage(IncomingMessage) {
-		if (IncomingMessage === null)
-			App.#IncomingMessage = Request;
-		else if (!isDerived(IncomingMessage, Request))
+	static set IncomingMessage(OwnIncomingMessage) {
+		if (OwnIncomingMessage === null)
+			IncomingMessage = Request;
+		else if (!isDerived(OwnIncomingMessage, Request))
 			throw TypeError(`The parameter IncomingMessage is not derived from Request`);
-		App.#IncomingMessage = IncomingMessage;
+		IncomingMessage = OwnIncomingMessage;
 	};
 	//
-	static #ServerResponse = Response;
 	static get ServerResponse() {
-		return App.#ServerResponse;
+		return ServerResponse;
 	};
-	static set ServerResponse(ServerResponse) {
-		if (ServerResponse === null)
-			App.#ServerResponse = Response;
-		else if (!isDerived(ServerResponse, Response))
+	static set ServerResponse(OwnServerResponse) {
+		if (OwnServerResponse === null)
+			ServerResponse = Response;
+		else if (!isDerived(OwnServerResponse, Response))
 			throw TypeError(`The parameter ServerResponse is not a child of Response`);
-		App.#ServerResponse = ServerResponse;
+		ServerResponse = OwnServerResponse;
 	};
 	//
-	// api register
-	static #ApiRegister = ApiRegister;
-	static get ApiRegister() {
-		return App.#ApiRegister;
+	// api record
+	static get ApiRecord() {
+		return ApiRegister.ApiRecord;
 	};
-	static set ApiRegister(OwnApiRegister) {
-		if (OwnApiRegister === null)
-			App.#ApiRegister = ApiRegister;
-		else if (!isDerived(OwnApiRegister, ApiRegister))
-			throw TypeError(`The parameter OwnApiRegister is not a child of ApiRegister`);
-		App.#ApiRegister = OwnApiRegister;
+	static set ApiRecord(OwnApiRecord) {
+		ApiRegister.ApiRecord = OwnApiRecord;
 	};
 	//
 	// logger
