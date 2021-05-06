@@ -4,7 +4,7 @@ const Request = require("./lib/request");
 const Response = require("./lib/response");
 const ApiRegister = require("./lib/apiRegister");
 const isDerived = require("is-derived");
-const { isObject } = require("./lib/common");
+const { objectCheck } = require("./lib/common");
 const logger = require("./lib/logger");
 const _mimetypes = require("./lib/fileTypes");
 let IncomingMessage = Request;
@@ -19,7 +19,7 @@ class App {
 	 * @param {Function} options.logger.log
 	 * @param {Function} options.logger.error */
 	constructor(protocol, options = {}) {
-		isObject(options);
+		objectCheck(options);
 		if (protocol === "http")
 			this.#server = new HttpServer({ IncomingMessage, ServerResponse });
 		else if (protocol === "https")
@@ -30,65 +30,57 @@ class App {
 	};
 	/**
 	 * @param {Object} options
-	 * @param {String} options.port 
-	 * @param {String} options.hostname 
+	 * @param {String} options.port
+	 * @param {String} options.hostname
 	 * @param {Function} options.listeningListener
 	 **/
 	listen(options = {}) {
-		const { port, hostname, listeningListener } = options;
-		this.#server.listen(port, hostname, listeningListener);
+		let { port = 8080, hostname = "127.0.0.1", listeningListener = () => console.log(`Listening on: ${this.#server.url}`) } = options;
+		this.#server.listen(port, hostname, null, listeningListener);
 	};
-	/**@param {String} path 
+	/**@param {String} path
 	 * @param {Function} callback */
 	get(path, callback) {
-		if (typeof callback !== "function")
-			throw new TypeError("Callback must be a function");
+		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
 		const route = this.#server.routes.add(path);
-		if (route.GET)
-			throw new Error(`There is already an API at GET ${path}`);
+		if (route.GET) throw new Error(`There is already an API at GET ${path}`);
 		route.GET = callback;
 		callback.apiRecord = this.#apiRegister.register(path, "GET");
 	};
-	/**@param {String} path 
+	/**@param {String} path
 	 * @param {Function} callback */
 	post(path, callback) {
-		if (typeof callback !== "function")
-			throw new TypeError("Callback must be a function");
+		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
 		const route = this.#server.routes.add(path);
-		if (route.POST)
-			throw new Error(`There is already an API at POST ${path}`);
+		if (route.POST) throw new Error(`There is already an API at POST ${path}`);
 		route.POST = callback;
 		callback.apiRecord = this.#apiRegister.register(path, "POST");
 	};
-	/**@param {String} path 
+	/**@param {String} path
 	 * @param {Function} callback */
 	put(path, callback) {
-		if (typeof callback !== "function")
-			throw new TypeError("Callback must be a function");
+		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
 		const route = this.#server.routes.add(path);
-		if (route.PUT)
-			throw new Error(`There is already an API at PUT ${path}`);
+		if (route.PUT) throw new Error(`There is already an API at PUT ${path}`);
 		route.PUT = callback;
 		callback.apiRecord = this.#apiRegister.register(path, "PUT");
 	};
-	/**@param {String} path 
+	/**@param {String} path
 	 * @param {Function} callback */
 	delete(path, callback) {
-		if (typeof callback !== "function")
-			throw new TypeError("Callback must be a function");
+		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
 		const route = this.#server.routes.add(path);
-		if (route.DELETE)
-			throw new Error(`There is already an API at DELETE ${path}`);
+		if (route.DELETE) throw new Error(`There is already an API at DELETE ${path}`);
 		route.DELETE = callback;
 		callback.apiRecord = this.#apiRegister.register(path, "DELETE");
 	};
 	/**
-	 * 
-	 * @param {Object} register 
-	 * @param {Boolean} reset 
+	 *
+	 * @param {Object} register
+	 * @param {Boolean} reset
 	 */
 	loadApiRegister(register, reset) {
-		isObject(register);
+		objectCheck(register);
 		const apis = this.#apiRegister.apis;
 		for (const path in apis) {
 			const api = apis[path];
@@ -103,6 +95,9 @@ class App {
 		}
 		this.#apiRegister.load(register);
 	};
+	get url() {
+		return this.#server.url;
+	};
 	get apis() {
 		return this.#apiRegister.apis;
 	};
@@ -112,10 +107,8 @@ class App {
 		return IncomingMessage;
 	};
 	static set IncomingMessage(OwnIncomingMessage) {
-		if (OwnIncomingMessage === null)
-			IncomingMessage = Request;
-		else if (!isDerived(OwnIncomingMessage, Request))
-			throw TypeError(`The parameter IncomingMessage is not derived from Request`);
+		if (OwnIncomingMessage === null) return IncomingMessage = Request;
+		else if (!isDerived(OwnIncomingMessage, Request)) throw TypeError(`The parameter IncomingMessage is not derived from Request`);
 		IncomingMessage = OwnIncomingMessage;
 	};
 	//
@@ -123,10 +116,8 @@ class App {
 		return ServerResponse;
 	};
 	static set ServerResponse(OwnServerResponse) {
-		if (OwnServerResponse === null)
-			ServerResponse = Response;
-		else if (!isDerived(OwnServerResponse, Response))
-			throw TypeError(`The parameter ServerResponse is not a child of Response`);
+		if (OwnServerResponse === null) return ServerResponse = Response;
+		else if (!isDerived(OwnServerResponse, Response)) throw TypeError(`The parameter ServerResponse is not a child of Response`);
 		ServerResponse = OwnServerResponse;
 	};
 	//
@@ -148,7 +139,7 @@ class App {
 		return _mimetypes;
 	};
 	static set mimetypes(mimetypes) {
-		isObject(mimetypes);
+		objectCheck(mimetypes);
 		for (const type in mimetypes)
 			_mimetypes[type] = mimetypes[type];
 	};
