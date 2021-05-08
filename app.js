@@ -4,7 +4,6 @@ const Request = require("./lib/request");
 const Response = require("./lib/response");
 const ApiRegister = require("./lib/apiRegister");
 const isDerived = require("is-derived");
-const { objectCheck } = require("./lib/common");
 const logger = require("./lib/logger");
 const _mimetypes = require("./lib/fileTypes");
 let IncomingMessage = Request;
@@ -19,7 +18,7 @@ class App {
 	 * @param {Function} options.logger.log
 	 * @param {Function} options.logger.error */
 	constructor(protocol, options = {}) {
-		objectCheck(options);
+		if (Object.prototype.toString.call(options) !== "[object Object]") throw new TypeError("param must be an object");
 		if (protocol === "http")
 			this.#server = new HttpServer({ IncomingMessage, ServerResponse });
 		else if (protocol === "https")
@@ -80,7 +79,7 @@ class App {
 	 * @param {Boolean} reset
 	 */
 	loadApiRegister(register, reset) {
-		objectCheck(register);
+		if (Object.prototype.toString.call(register) !== "[object Object]") throw new TypeError("param must be an object");
 		const apis = this.#apiRegister.apis;
 		for (const path in apis) {
 			const api = apis[path];
@@ -139,7 +138,7 @@ class App {
 		return _mimetypes;
 	};
 	static set mimetypes(mimetypes) {
-		objectCheck(mimetypes);
+		if (Object.prototype.toString.call(mimetypes) !== "[object Object]") throw new TypeError("param must be an object");
 		for (const type in mimetypes)
 			_mimetypes[type] = mimetypes[type];
 	};
