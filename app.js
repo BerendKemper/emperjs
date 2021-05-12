@@ -25,7 +25,6 @@ class App {
 			this.#server = new HttpsServer({ IncomingMessage, ServerResponse });
 		else
 			throw new TypeError("Protocol must be http or https");
-		this.#server.initialize();
 	};
 	/**
 	 * @param {Object} options
