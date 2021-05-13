@@ -71,7 +71,7 @@ Starts the webserver listening for connections.
 		</ul>
 	</details>
 </ul>
-An <code>incomming request</code> that has found it's route to this <code>path</code> and it's corresponding <code>HTTP method</code> invokes that <code>callback</code>. If the request's <code>path</code> does not exist an the <code>response</code> return with status <code>400</code> and specifies which part of the <code>path</code> was not identified, else if the request's <code>HTTP method</code> does not exist the <code>response</code> return with status <code>405</code> method not allowed.
+An <code>incomming request</code> that has found it's route to this <code>path</code> and it's corresponding <code>HTTP method</code> invokes that <code>callback</code>. If the request's <code>path</code> does not exist the <code>response</code> return with status <code>400</code> and specifies which part of the <code>path</code> was not identified, else if the request's <code>HTTP method</code> does not exist the <code>response</code> return with status <code>405</code> method not allowed.
 <h3><code>app.delete(path, callback)</code></h3>
 Places the <code>callback</code> as a DELETE method at <code>path</code>.
 <h3><code>app.get(path, callback)</code></h3>
