@@ -80,6 +80,8 @@ Places the <code>callback</code> as a GET method at <code>path</code>.
 Places the <code>callback</code> as a HEAD method at <code>path</code>.
 <h3><code>app.options(path, callback)</code></h3>
 Places the <code>callback</code> as a OPTIONS method at <code>path</code>.
+<h3><code>app.patch(path, callback)</code></h3>
+Places the <code>callback</code> as a PATCH method at <code>path</code>.
 <h3><code>app.post(path, callback)</code></h3>
 Places the <code>callback</code> as a POST method at <code>path</code>.
 <h3><code>app.put(path, callback)</code></h3>
