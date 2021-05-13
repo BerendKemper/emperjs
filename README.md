@@ -43,7 +43,7 @@ const App = require("emperjs");
 	</details>
 </ul>
 Starts the webserver listening for connections.
-<h3>CRUD methods:</h3>
+<h3>HTTP methods:</h3>
 <ul>
 	<details>
 		<summary>
@@ -69,21 +69,25 @@ Starts the webserver listening for connections.
 		</ul>
 	</details>
 </ul>
+<h3><code>app.delete(path, callback)</code></h3>
+Places the <code>callback</code> as a DELETE method at <code>path</code>.
 <h3><code>app.get(path, callback)</code></h3>
 Places the <code>callback</code> as a GET method at <code>path</code>.
+<h3><code>app.head(path, callback)</code></h3>
+Places the <code>callback</code> as a HEAD method at <code>path</code>.
+<h3><code>app.options(path, callback)</code></h3>
+Places the <code>callback</code> as a OPTIONS method at <code>path</code>.
 <h3><code>app.post(path, callback)</code></h3>
 Places the <code>callback</code> as a POST method at <code>path</code>.
 <h3><code>app.put(path, callback)</code></h3>
 Places the <code>callback</code> as a PUT method at <code>path</code>.
-<h3><code>app.delete(path, callback)</code></h3>
-Places the <code>callback</code> as a DELETE method at <code>path</code>.
 <h3><code>app.loadApiRegister(register, reset)</code></h3>
 <ul>
 	<details>
 		<summary>
 			<code>register</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
 		</summary>
-		Throws a TypeError when <code>register</code> is not an object. 
+		Throws a TypeError when <code>register</code> is not an object.
 	</details>
 	<details>
 		<summary>
@@ -223,7 +227,7 @@ Use this method to add a new <code>requestBodyParser</code>. On default <code>re
 An individual <code>requestBodyParser</code> has a method <code>parse</code> and this is used by the <code>request</code> in order to parse data.
 
 <h2>Class: <code>ApiRecord</code></h2>
-Every api created in the <code>App</code> with the CRUD methods <code>get</code>, <code>post</code>, <code>put</code> and <code>delete</code> are stored in the <code>App</code>'s <code>ApiRegister</code> as an <code>ApiRecord</code>. Every <code>apiRecord</code> stores and updates information from the server's endpoints. This class can be read from the <code>App</code>'s static property <code>ApiRecord</code>.
+Every HTTP method published is stored in the <code>App</code>'s <code>ApiRegister</code> as an <code>ApiRecord</code>. Every <code>apiRecord</code> stores and updates information from the server's endpoints. This class can be read from the <code>App</code>'s static property <code>ApiRecord</code>.
 <h3><code>apiRecord.reset()</code></h3>
 This method sets <code>counter</code> and <code>bytes</code> properties to <code>0</code>.
 <h3><code>apiRecord.counter</code></h3>
@@ -232,7 +236,7 @@ This porperty is used to count the amount of times a request has successfully re
 This property is used to update the amount of <code>bytes</code> written from the server to clients.
 
 <h2>Class: <code>Logger</code></h2>
-An instance from this class is exported and required throughout the <code>App</code>'s library. The instance can be read from the <code>App</code>'s static property <code>logger</code>. 
+An instance from this class is exported and required throughout the <code>App</code>'s library. The instance can be read from the <code>App</code>'s static property <code>logger</code>.
 <h3><code>logger.log</code></h3>
 Readable and writable property for the log function. If set with a value that is not a function an error is thrown.
 <h3><code>logger.error</code></h3>
