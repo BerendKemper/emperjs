@@ -64,6 +64,12 @@ class App {
 	/**
 	 * @param {String} path
 	 * @param {Function} callback */
+	options(path, callback) {
+		this.#publishHttpMethod(path, "OPTIONS", callback);
+	};
+	/**
+	 * @param {String} path
+	 * @param {Function} callback */
 	patch(path, callback) {
 		this.#publishHttpMethod(path, "PATCH", callback);
 	};
