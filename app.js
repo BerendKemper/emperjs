@@ -36,44 +36,50 @@ class App {
 		let { port = 8080, hostname = "127.0.0.1", listeningListener = () => console.log(`Listening on: ${this.#server.url}`) } = options;
 		this.#server.listen(port, hostname, null, listeningListener);
 	};
-	/**@param {String} path
-	 * @param {Function} callback */
-	get(path, callback) {
+	#publishHttpMethod(path, method, callback) {
 		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
 		const route = this.#server.routes.add(path);
-		if (route.GET) throw new Error(`There is already an API at GET ${path}`);
-		route.GET = callback;
-		callback.apiRecord = this.#apiRegister.register(path, "GET");
-	};
-	/**@param {String} path
-	 * @param {Function} callback */
-	post(path, callback) {
-		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-		const route = this.#server.routes.add(path);
-		if (route.POST) throw new Error(`There is already an API at POST ${path}`);
-		route.POST = callback;
-		callback.apiRecord = this.#apiRegister.register(path, "POST");
-	};
-	/**@param {String} path
-	 * @param {Function} callback */
-	put(path, callback) {
-		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-		const route = this.#server.routes.add(path);
-		if (route.PUT) throw new Error(`There is already an API at PUT ${path}`);
-		route.PUT = callback;
-		callback.apiRecord = this.#apiRegister.register(path, "PUT");
-	};
-	/**@param {String} path
-	 * @param {Function} callback */
-	delete(path, callback) {
-		if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-		const route = this.#server.routes.add(path);
-		if (route.DELETE) throw new Error(`There is already an API at DELETE ${path}`);
-		route.DELETE = callback;
-		callback.apiRecord = this.#apiRegister.register(path, "DELETE");
+		if (route[method]) throw new Error(`There is already an API at ${method} ${path}`);
+		route[method] = callback;
+		callback.apiRecord = this.#apiRegister.register(path, method);
 	};
 	/**
-	 *
+	 * @param {String} path
+	 * @param {Function} callback */
+	delete(path, callback) {
+		this.#publishHttpMethod(path, "DELETE", callback);
+	};
+	/**
+	 * @param {String} path
+	 * @param {Function} callback */
+	get(path, callback) {
+		this.#publishHttpMethod(path, "GET", callback);
+	};
+	/**
+	 * @param {String} path
+	 * @param {Function} callback */
+	head(path, callback) {
+		this.#publishHttpMethod(path, "HEAD", callback);
+	};
+	/**
+	 * @param {String} path
+	 * @param {Function} callback */
+	patch(path, callback) {
+		this.#publishHttpMethod(path, "PATCH", callback);
+	};
+	/**
+	 * @param {String} path
+	 * @param {Function} callback */
+	post(path, callback) {
+		this.#publishHttpMethod(path, "POST", callback);
+	};
+	/**
+	 * @param {String} path
+	 * @param {Function} callback */
+	put(path, callback) {
+		this.#publishHttpMethod(path, "PUT", callback);
+	};
+	/**
 	 * @param {Object} register
 	 * @param {Boolean} reset
 	 */

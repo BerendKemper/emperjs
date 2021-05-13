@@ -1,0 +1,8 @@
+{
+	"DELETE": true,
+	"GET": true,
+	"HEAD": true,
+	"PATCH": true,
+	"POST": true,
+	"PUT": true
+}
