@@ -14,17 +14,18 @@ class App {
 	/**
 	 * @param {String} protocol
 	 * @param {Object} options
-	 * @param {Object} options.logger
-	 * @param {Function} options.logger.log
-	 * @param {Function} options.logger.error */
+	 **/
 	constructor(protocol, options = {}) {
 		if (Object.prototype.toString.call(options) !== "[object Object]") throw new TypeError("param must be an object");
+		options.IncomingMessage = IncomingMessage;
+		options.ServerResponse = ServerResponse;
 		if (protocol === "http")
-			this.#server = new HttpServer({ IncomingMessage, ServerResponse });
+			this.#server = new HttpServer(options);
 		else if (protocol === "https")
-			this.#server = new HttpsServer({ IncomingMessage, ServerResponse });
+			this.#server = new HttpsServer(options);
 		else
 			throw new TypeError("Protocol must be http or https");
+		console.log("options:", options);
 	};
 	/**
 	 * @param {Object} options
