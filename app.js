@@ -25,7 +25,6 @@ class App {
 			this.#server = new HttpsServer(options);
 		else
 			throw new TypeError("Protocol must be http or https");
-		console.log("options:", options);
 	};
 	/**
 	 * @param {Object} options
@@ -112,40 +111,40 @@ class App {
 	get apis() {
 		return this.#apiRegister.apis;
 	};
-	//
-	// server options
 	static get IncomingMessage() {
 		return IncomingMessage;
 	};
+	/**
+	 * Set this value to null in order to reset it to the base Request class.
+	 */
 	static set IncomingMessage(OwnIncomingMessage) {
 		if (OwnIncomingMessage === null) return IncomingMessage = Request;
 		else if (!isDerived(OwnIncomingMessage, Request)) throw TypeError(`The parameter IncomingMessage is not derived from Request`);
 		IncomingMessage = OwnIncomingMessage;
 	};
-	//
 	static get ServerResponse() {
 		return ServerResponse;
 	};
+	/**
+	 * Set this value to null in order to reset it to the base Response class.
+	 */
 	static set ServerResponse(OwnServerResponse) {
 		if (OwnServerResponse === null) return ServerResponse = Response;
 		else if (!isDerived(OwnServerResponse, Response)) throw TypeError(`The parameter ServerResponse is not a child of Response`);
 		ServerResponse = OwnServerResponse;
 	};
-	//
-	// api record
 	static get ApiRecord() {
 		return ApiRegister.ApiRecord;
 	};
+	/**
+	 * Set this value to null in order to reset it to the base ApiRecord class.
+	 */
 	static set ApiRecord(OwnApiRecord) {
 		ApiRegister.ApiRecord = OwnApiRecord;
 	};
-	//
-	// logger
 	static get logger() {
 		return logger;
 	};
-	//
-	// logger
 	static get mimetypes() {
 		return _mimetypes;
 	};
