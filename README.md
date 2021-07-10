@@ -108,6 +108,8 @@ Readable property of the <code>apiRegister</code>'s <code>apis</code> property.
 Static readable and writable property of the <code>server</code>'s <code>IncomingMessage</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>Request</code>.
 <h3><code>App.ServerResponse</code></h3>
 Static readable and writable property of the <code>server</code>'s <code>ServerResponse</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>Response</code>.
+<h3><code>App.Socket</code></h3>
+Static readable and writable property of the <code>server</code>'s <code>Socket</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>Socket</code>.
 <h3><code>App.ApiRecord</code></h3>
 Static readable and writable property of the <code>ApiRegister</code>'s <code>ApiRecord</code> class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class <code>ApiRecord</code>.
 <h3><code>App.logger</code></h3>
@@ -115,9 +117,13 @@ Static readable property of the <code>App</code>'s logger instance.
 <h3><code>App.mimetypes</code></h3>
 Static readable and writable property of the <code>App</code>'s mimetypes. These mimetypes are used at the method <code>response</code>.<code>sendFile</code> to identify a file's extension with the corresponding mimetype.
 
+<h2>Class: <code>Socket</code></h2>
+<ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/net.html#net_class_net_socket">net.Socket</a></li></ul>
+This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class <code>Socket</code> can be read from the static property <code>App.Socket</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Request</code>.
+
 <h2>Class: <code>Request</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_incomingmessage">http.IncomingMessage</a></li></ul>
-This object is created internally by the server. It is passed as the first parameter to an endpoint's function. It may be used to access response status, headers and data. The class <code>Request</code> can be read from the <code>App</code>'s static property <code>IncomingMessage</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Request</code>.
+This object is created internally by the server. It is passed as the first parameter to any endpoint's function. It may be used to access response status, headers and data. The class <code>Request</code> can be read from the static property <code>App.IncomingMessage</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Request</code>.
 <h3><code>request.body</code></h3>
 Property where the requests parsed <code>body</code> resides. The <code>body</code> is parsed by an individual <code>requestBodyParser</code>.
 <h3><code>Request.bodyParsers</code></h3>
@@ -125,7 +131,7 @@ Static readable property of the <code>Request</code>'s <code>bodyParsers</code> 
 
 <h2>Class: <code>Response</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_serverresponse">http.ServerResponse</a></li></ul>
-This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class <code>Response</code> can be read from the <code>App</code>'s static property <code>ServerResponse</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Response</code>.
+This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class <code>Response</code> can be read from the static property <code>App.ServerResponse</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Response</code>.
 <h3><code>response.sendJson(status, data)</code></h3>
 <ul>
 	<details>
@@ -228,11 +234,8 @@ The <code>requestBodyParsers</code> is read from the static property <code>bodyP
 </ul>
 Use this method to add a new <code>requestBodyParser</code>. On default <code>requestBodyParsers</code> has a <code>requestBodyParser</code> for <code>content-type</code> <code>application/json</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for <code>content-type</code> <code>application/x-www-form-urlencoded</code> that parses with <a href="https://nodejs.org/dist/latest-v14.x/docs/api/querystring.html#querystring_querystring_parse_str_sep_eq_options">querystring.parse</a>.
 
-<h2>Class: <code>RequestBodyParser</code></h2>
-An individual <code>requestBodyParser</code> has a method <code>parse</code> and this is used by the <code>request</code> in order to parse data.
-
 <h2>Class: <code>ApiRecord</code></h2>
-Every HTTP method published is stored in the <code>App</code>'s <code>ApiRegister</code> as an <code>ApiRecord</code>. Every <code>apiRecord</code> stores and updates information from the server's endpoints. This class can be read from the <code>App</code>'s static property <code>ApiRecord</code>.
+Every HTTP method published is stored in the <code>App</code>'s <code>ApiRegister</code> as an <code>ApiRecord</code>. Every <code>apiRecord</code> stores and updates information from the server's endpoints. This class can be read from the static property <code>App.ApiRecord</code>.
 <h3><code>apiRecord.reset()</code></h3>
 This method sets <code>counter</code> and <code>bytes</code> properties to <code>0</code>.
 <h3><code>apiRecord.counter</code></h3>
@@ -241,7 +244,7 @@ This porperty is used to count the amount of times a request has successfully re
 This property is used to update the amount of <code>bytes</code> written from the server to clients.
 
 <h2>Class: <code>Logger</code></h2>
-An instance from this class is exported and required throughout the <code>App</code>'s library. The instance can be read from the <code>App</code>'s static property <code>logger</code>.
+An instance from this class is exported and required throughout the <code>App</code>'s library. The instance can be read from the static property <code>App.logger</code>.
 <h3><code>logger.log</code></h3>
 Readable and writable property for the log function. If set with a value that is not a function an error is thrown.
 <h3><code>logger.error</code></h3>
