@@ -119,7 +119,7 @@ Static readable and writable property of the <code>App</code>'s mimetypes. These
 
 <h2>Class: <code>Socket</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/net.html#net_class_net_socket">net.Socket</a></li></ul>
-This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class <code>Socket</code> can be read from the static property <code>App.Socket</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Request</code>.
+This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class <code>Socket</code> can be read from the static property <code>App.Socket</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Socket</code>.
 
 <h2>Class: <code>Request</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_incomingmessage">http.IncomingMessage</a></li></ul>
