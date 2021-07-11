@@ -1,6 +1,6 @@
 {
     "name": "emperjs",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "",
     "main": "app.js",
     "directories": {
@@ -24,5 +24,9 @@
     "dependencies": {
         "ca11back-queue": "^1.x",
         "is-derived": "^0.x"
-    }
+    },
+    "engines": {
+        "node": ">14.0.0"
+    },
+    "engineStrict": true
 }
