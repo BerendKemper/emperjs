@@ -9,7 +9,6 @@ const _mimetypes = require("./lib/fileTypes");
 const socket = require("./lib/socket");
 let EmperRequest = Request;
 let EmperResponse = Response;
-/**@callback requestCallback @param {Request} request @param {Response} response*/
 class App {
     #server = null;
     #apiRegister = new ApiRegister();
@@ -133,3 +132,4 @@ class App {
     };
 };
 module.exports = App;
+/**@callback requestCallback @param {Request} request @param {Response} response*/
