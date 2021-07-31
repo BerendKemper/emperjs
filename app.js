@@ -29,9 +29,12 @@ module.exports = (protocol, options) => {
     // function onError(error) { };
     const ApiRegister = ApiRegisterFactory();
     const apiRegister = new ApiRegister();
+    let app = false;
     return class App extends http.Server {
         /**@param {String} protocol @param {{insecureHTTPParser:boolean maxHeaderSize:number}} options**/
         constructor(options = {}) {
+            if (app === true) throw new Error("An App can only create one instance");
+            app = true;
             if (Object.prototype.toString.call(options) !== "[object Object]") throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;

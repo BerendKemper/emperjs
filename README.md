@@ -29,7 +29,6 @@ Creates a class <code>App</code>. <code>App</code> is described below.
 <h2>Class: <code>App</code></h2>
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_server">http.Server</a> | <a href="https://nodejs.org/dist/latest-v14.x/docs/api/https.html#https_class_https_server">https.Server</a></li></ul>
 <h3><code>new App()</code></h3>
-Create a new instance of the <code>App</code>. Do not make more than one instance from a single class <code>App</code>.
 <h3><code>app.listen(options)</code></h3>
 <ul>
 	<details>
