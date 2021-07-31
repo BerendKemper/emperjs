@@ -1,21 +1,35 @@
 # emperjs
-A framework to make a http or https webserver. Has build in an api router and register. <b>This work is still in progress!</b>
+A framework to make a http and https webserver. Has build in an api router and register. <b>This work is still in progress!</b>
 <code>npm i emperjs</code>
 
 ```javascript
-const App = require("emperjs");
+const AppFactory = require("emperjs");
+const App = AppFactory("https");
+const app = new App();
+// Or
+const App = require("emperjs")("http");
+const app = new App();
 ```
-
-<h2>Class: <code>App</code></h2>
-<h3><code>new App(protocol])</code></h3>
+<h2>AppFactory(protocol)</h2>
 <ul>
 	<details>
 		<summary>
-			<code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
+			<code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
 		</summary>
-		The <code>protocol</code> can be either <code>http</code> or <code>https</code>.
+		The <code>protocol</code> is <code>http</code> or <code>https</code>. The factory created class <code>App</code> extends dynamically from the protocol's Server class.
+	</details>
+	<details>
+		<summary>
+			<code>Returns</code> &lt;App&gt;
+		</summary>
+        The factory creates a class <code>App</code>.
 	</details>
 </ul>
+Creates a class <code>App</code>. <code>App</code> is described below.
+<h2>Class: <code>App</code></h2>
+<ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_server">http.Server</a> | <a href="https://nodejs.org/dist/latest-v14.x/docs/api/https.html#https_class_https_server">https.Server</a></li></ul>
+<h3><code>new App()</code></h3>
+Create a new instance of the App. Do not make more than one instance from a single class App
 <h3><code>app.listen(options)</code></h3>
 <ul>
 	<details>
