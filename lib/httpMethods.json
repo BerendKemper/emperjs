@@ -1,9 +1,0 @@
-{
-    "DELETE": true,
-    "GET": true,
-    "HEAD": true,
-    "OPTIONS": true,
-    "PATCH": true,
-    "POST": true,
-    "PUT": true
-}
