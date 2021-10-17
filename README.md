@@ -54,6 +54,12 @@ Creates a class <code>App</code>. <code>App</code> is described below.
 			</details>
 		</ul>
 	</details>
+    <details>
+        <summary>
+            Returns <code>this</code> &lt;App&gt;
+        </summary>
+        Allows chaining methods.
+    </details>
 </ul>
 Starts the webserver listening for connections.
 <h3>HTTP methods:</h3>
@@ -113,8 +119,24 @@ Places the <code>callback</code> as a PUT method at <code>path</code>.
 		</summary>
 		If <code>reset</code> is <code>true</code> sets every endpoint's <code>counter</code> and <code>bytes</code> property to <code>0</code>.
 	</details>
+    <details>
+        <summary>
+            Returns <code>this</code> &lt;App&gt;
+        </summary>
+        Allows chaining methods.
+    </details>
 </ul>
 Loads an external object to replace the <code>app</code>'s <code>apis</code> property from the <code>app</code>'s <code>apiRegister</code>.
+<h3><code>app.destroyUnusedRecords()</code></h3>
+<ul>
+    <details>
+        <summary>
+            Returns <code>this</code> &lt;App&gt;
+        </summary>
+        Allows chaining methods.
+    </details>
+</ul>
+Destroys any <code>ApiRecord</code> that does not exist in a route.
 <h3><code>app.apis</code></h3>
 Readable property of the <code>apiRegister</code>'s <code>apis</code> property.
 <h3><code>App.IncomingMessage</code></h3>
@@ -179,6 +201,12 @@ Invokes the <code>response</code>'s <a href="https://nodejs.org/dist/latest-v14.
 		</summary>
 		A <code>byteLength</code> can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
 	</details>
+    <details>
+        <summary>
+            Returns <code>this</code> &lt;Response&gt;
+        </summary>
+        Allows chaining methods.
+    </details>
 </ul>
 Each endpoint is recorded in an <code>ApiRecord</code> from the <code>App</code>'s <code>ApiRegister</code>. Invoking <code>report</code> increments the <code>apiRecord</code>'s counter</code> property and adds the <code>byteLength</code> to the <code>apiRecord</code>'s <code>bytes</code> property.
 <h3><code>response.sendError(status, error)</code></h3>
@@ -244,6 +272,12 @@ The <code>requestBodyParsers</code> is read from the static property <code>bodyP
 		</summary>
 		If an <code>errorMessage</code> is given and the <code>requestBodyParser</code> would fail at parsing an error with this <code>errorMessage</code> is send to the <code>response</code> with the method <code>sendError</code>, otherwise the error thrown by the parser itself is send.
 	</details>
+    <details>
+        <summary>
+            Returns <code>this</code> &lt;RequestBodyParsers&gt;
+        </summary>
+        Allows chaining methods.
+    </details>
 </ul>
 Use this method to add a new <code>requestBodyParser</code>. On default <code>requestBodyParsers</code> has a <code>requestBodyParser</code> for <code>content-type</code> <code>application/json</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for <code>content-type</code> <code>application/x-www-form-urlencoded</code> that parses with <a href="https://nodejs.org/dist/latest-v14.x/docs/api/querystring.html#querystring_querystring_parse_str_sep_eq_options">querystring.parse</a>.
 
