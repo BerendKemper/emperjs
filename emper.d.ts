@@ -2,15 +2,17 @@ import { Server, IncomingMessage, ServerResponse } from "http"
 import * as net from "net"
 class App extends Server {
     constructor(protocol: string, options: { insecureHTTPParser: boolean, maxHeaderSize: number })
-    listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): void
+    listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): App
     delete(path: string, callback: requestCallback): void
     get(path: string, callback: requestCallback): void
     head(path: string, callback: requestCallback): void
     options(path: string, callback: requestCallback): void
     patch(path: string, callback: requestCallback): void
     put(path: string, callback: requestCallback): void
-    /**Loads an object*/
-    loadApiRegister(register: { [path: string]: { bytes: number, counter: number } }, reset: boolean): void
+    /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
+    loadApiRegister(register: { [path: string]: { bytes: number, counter: number } }, reset: boolean): App
+    /**Destroys any ApiRecord that does not exist in a route*/
+    destroyUnusedRecords(): App
     /**"http(s)://${address}:${port}*/
     get url(): string
     get apis(): { [path: string]: ApiRecord }
@@ -28,7 +30,7 @@ class App extends Server {
     static set ApiRecord(ApiRecord: ApiRecord): void
     static get logger(): logger
     static get mimetypes(): { [ext: string]: string }
-    /**Add mimetypes to the dictionary. The mimetypes enables detecting the content-type by the extension from a file and is used in the response's sendFile method*/
+    /**Add mimetypes to the dictionary. The mimetypes enables detecting the content-type by the extension from a file and is used in the response's sendFile method.*/
     static set mimetypes(mimetypes: { [ext: string]: string }): void
 }
 type AppFactory = (protocol: string, options: {}) => typeof App
@@ -37,7 +39,7 @@ class Request extends IncomingMessage {
     socket: Socket
     connection: Socket
     body?: object
-    /**Contains key values identified in the url's path by /:key */
+    /**Contains key values identified in the url's path by /:key.*/
     params?: { [key: string]: string }
     static get bodyParsers(): RequestBodyParsers
 }
@@ -60,7 +62,7 @@ class Socket extends net.Socket {
 class ApiRecord {
     bytes: number
     counter: number
-    /**Copies record's counter and bytes properties, if falsy sets them to 0*/
+    /**Copies record's counter and bytes properties, if falsy sets them to 0.*/
     from(record: object): void
     /**Sets counter and bytes to 0*/
     reset(): ApiRecord

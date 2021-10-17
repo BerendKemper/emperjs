@@ -7,9 +7,6 @@ const _mimetypes = require("emperjs/lib/fileTypes");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
 const isDerived = require("is-derived");
-function defaultListener() {
-    console.log(`Listening on: ${this.url}`);
-}
 /**@type {import("emperjs/emper").AppFactory}*/
 module.exports = (protocol, options) => {
     var http = require("http");
@@ -46,9 +43,9 @@ module.exports = (protocol, options) => {
             this.once("listening", onListening);
             if (logger) this.on("request", onRequest);
         }
-        listen(options = {}, listeningListener = defaultListener) {
+        listen(options = {}, listeningListener = () => console.log(`Listening on: ${this.url}`)) {
             const { hostname: host = "127.0.0.1", port = 8080, backlog = null } = options ?? {};
-            super.listen({ port, host, backlog }, listeningListener);
+            return super.listen({ port, host, backlog }, listeningListener);
         }
         delete(path, callback) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
@@ -93,6 +90,19 @@ module.exports = (protocol, options) => {
                         api[method].from(loadingApi[method]);
             }
             apiRegister.load(register);
+            return this;
+        }
+        destroyUnusedRecords() {
+            const apis = apiRegister.apis;
+            for (const path in apis) {
+                const api = apis[path];
+                for (const method in api)
+                    if (!routes.has(path, method))
+                        delete (api[method]);
+                if (Object.keys(api).length === 0)
+                    delete (apis[path]);
+            }
+            return this;
         }
         get url() {
             const address = this.address();
