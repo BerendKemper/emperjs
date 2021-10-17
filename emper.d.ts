@@ -10,12 +10,12 @@ class App extends Server {
     patch(path: string, callback: requestCallback): void
     put(path: string, callback: requestCallback): void
     /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
-    loadApiRegister(register: { [path: string]: { bytes: number, counter: number } }, reset: boolean): App
+    loadApiRegister(register: { [path: string]: { [method: string]: { bytes: number, counter: number } } }, reset: boolean): App
     /**Destroys any ApiRecord that does not exist in a route*/
     destroyUnusedRecords(): App
     /**"http(s)://${address}:${port}*/
     get url(): string
-    get apis(): { [path: string]: ApiRecord }
+    get apis(): { [path: string]: { [method: string]: ApiRecord } }
     static get IncomingMessage(): typeof Request
     /**Set this value to null in order to reset it to the base Request class.*/
     static set IncomingMessage(IncomingMessage: Request): void
