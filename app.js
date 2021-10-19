@@ -7,6 +7,7 @@ const _mimetypes = require("emperjs/lib/fileTypes");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
 const isDerived = require("is-derived");
+// const upgradeListener = require("./lib/webSocket");
 /**@type {import("emperjs/emper").AppFactory}*/
 module.exports = (protocol, options) => {
     var http = require("http");
@@ -17,15 +18,10 @@ module.exports = (protocol, options) => {
     const Request = RequestFactory(context);
     const Response = ResponseFactory(context);
     let EmperRequest = Request;
+    const requestListener = Request.listener();
     let EmperResponse = Response;
-    const Socket = SocketFactory(context);
-    const { onconnection } = Socket;
-    function onListening() {
-        this._handle.onconnection = onconnection;
-    }
-    function onRequest(request, response) {
-        logger?.log(request.method, "url: " + request.url);
-    }
+    const SocketModule = SocketFactory(context);
+    const listeningListener = SocketModule.listeningListener();
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
@@ -37,23 +33,24 @@ module.exports = (protocol, options) => {
             if (Object.prototype.toString.call(options) !== "[object Object]") throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;
-            super(options);
+            super(options, requestListener);
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
-            this.once("listening", onListening);
-            if (logger) this.on("request", onRequest);
+            this.once("listening", listeningListener);
+            // this.on("upgrade", upgradeListener);
         }
         listen(options = {}, listeningListener = () => console.log(`Listening on: ${this.url}`)) {
-            const { hostname: host = "127.0.0.1", port = 8080, backlog = null } = options ?? {};
+            const { hostname: host = "127.0.0.1", port = protocol === "https" ? 8081 : 8080, backlog = null } = options ?? {};
             return super.listen({ port, host, backlog }, listeningListener);
         }
         delete(path, callback) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
             routes.add(path, "DELETE", callback).apiRecord = apiRegister.register(path, "DELETE");
         }
-        get(path, callback) {
+        get(path, callback, record = true) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "GET", callback).apiRecord = apiRegister.register(path, "GET");
+            routes.add(path, "GET", callback)
+            if (record) callback.apiRecord = apiRegister.register(path, "GET");
         }
         head(path, callback) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
@@ -128,10 +125,10 @@ module.exports = (protocol, options) => {
             EmperResponse = OwnServerResponse;
         }
         static get Socket() {
-            return Socket.EmperSocket;
+            return SocketModule.EmperSocket;
         }
         static set Socket(OwnSocket) {
-            Socket.EmperSocket = OwnSocket;
+            SocketModule.EmperSocket = OwnSocket;
         }
         static get ApiRecord() {
             return ApiRegister.ApiRecord;
