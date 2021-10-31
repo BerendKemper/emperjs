@@ -2,7 +2,6 @@
 const RequestFactory = require("./lib/request");
 const ResponseFactory = require("./lib/response");
 const SocketFactory = require("./lib/socket");
-// const WebSocketFactory = require("./lib/webSocket");
 const ApiRegisterFactory = require("./lib/apiRegister");
 const _mimetypes = require("emperjs/lib/fileTypes");
 const Logger = require("./lib/logger");
@@ -22,7 +21,6 @@ module.exports = (protocol, options) => {
     let EmperResponse = Response;
     const SocketModule = SocketFactory(context);
     const listeningListener = SocketModule.listeningListener();
-    // const upgradeListener = WebSocketFactory(context);
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
@@ -38,7 +36,6 @@ module.exports = (protocol, options) => {
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
             this.once("listening", listeningListener);
-            // this.on("upgrade", upgradeListener);
         }
         listen(options = {}, listeningListener = () => console.log(`Listening on: ${this.url}`)) {
             const { hostname: host = "127.0.0.1", port = protocol === "https" ? 8081 : 8080, backlog = null } = options ?? {};
