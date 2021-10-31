@@ -2,7 +2,7 @@
 const RequestFactory = require("./lib/request");
 const ResponseFactory = require("./lib/response");
 const SocketFactory = require("./lib/socket");
-const WebSocketFactory = require("./lib/webSocket");
+// const WebSocketFactory = require("./lib/webSocket");
 const ApiRegisterFactory = require("./lib/apiRegister");
 const _mimetypes = require("emperjs/lib/fileTypes");
 const Logger = require("./lib/logger");
@@ -22,7 +22,7 @@ module.exports = (protocol, options) => {
     let EmperResponse = Response;
     const SocketModule = SocketFactory(context);
     const listeningListener = SocketModule.listeningListener();
-    const upgradeListener = WebSocketFactory(context);
+    // const upgradeListener = WebSocketFactory(context);
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
