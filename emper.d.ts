@@ -1,7 +1,8 @@
 import { Server, IncomingMessage, ServerResponse } from "http"
+new Server()
 import * as net from "net"
 class App extends Server {
-    constructor(protocol: string, options: { insecureHTTPParser: boolean, maxHeaderSize: number })
+    constructor(options: { insecureHTTPParser: boolean, maxHeaderSize: number })
     listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): App
     delete(path: string, callback: requestCallback): void
     get(path: string, callback: requestCallback): void
