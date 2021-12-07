@@ -9,6 +9,7 @@ class App extends Server {
     head(path: string, callback: requestCallback): void
     options(path: string, callback: requestCallback): void
     patch(path: string, callback: requestCallback): void
+    post(path: string, callback: requestCallback): void
     put(path: string, callback: requestCallback): void
     /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
     loadApiRegister(register: { [path: string]: { [method: string]: { bytes: number, counter: number } } }, reset: boolean): App
