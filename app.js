@@ -45,10 +45,9 @@ module.exports = (protocol, options) => {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
             routes.add(path, "DELETE", callback).apiRecord = apiRegister.register(path, "DELETE");
         }
-        get(path, callback, record = true) {
+        get(path, callback) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "GET", callback)
-            if (record) callback.apiRecord = apiRegister.register(path, "GET");
+            routes.add(path, "GET", callback).apiRecord = apiRegister.register(path, "GET");
         }
         head(path, callback) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
