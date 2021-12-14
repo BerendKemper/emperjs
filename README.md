@@ -164,7 +164,7 @@ Property where the request's parsed <code>body</code> is placed in. The <code>bo
 <h3><code>request.params</code></h3>
 Property where the request's path parameters are placed in. If the path to an API was <code>"/path/to/:param1/and/:param2"</code> and a request has a path of <code>"/path/to/aapje/and/12345"</code> then the params would become <code>{ param1: "aapje", param2: "12345" }</code>.
 <h3><code>request.urlSearchParams</code></h3>
-Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of <pre><code>"/path/to/api?param1=aapje&param2=01234&param2=56789"</code></pre> then the request.urlSearchParams.<a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return <code>["01234", "56789"]</code>.
+Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of <code>"/path/to/api?param1=aapje\&param2=01234\&param2=56789"</code> then the request.urlSearchParams.<a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return <code>["01234", "56789"]</code>.
 <h3><code>Request.bodyParsers</code></h3>
 Static readable property of the <code>Request</code>'s <code>bodyParsers</code> instance. Contains individual <code>requestBodyParser</code>.
 
