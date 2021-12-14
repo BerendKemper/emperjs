@@ -43,6 +43,8 @@ class Request extends IncomingMessage {
     body?: object
     /**Contains key values identified in the url's path by /:key.*/
     params?: { [key: string]: string }
+    urlPath: string
+    urlSearchParams: URLSearchParams
     static get bodyParsers(): RequestBodyParsers
 }
 class Response extends ServerResponse {
