@@ -83,4 +83,4 @@ type parse = (body: string) => object
 class RequestBodyParser {
     parse(body: string, request: Request, onParsed: onParsed): void
 }
-type onParsed = (parsed: object) => void
+type onParsed = (parsed) => void
