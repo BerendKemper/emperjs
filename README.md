@@ -160,7 +160,11 @@ This object is created internally by the server in the earliest stage of an inco
 <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_incomingmessage">http.IncomingMessage</a></li></ul>
 This object is created internally by the server. It is passed as the first parameter to any endpoint's function. It may be used to access response status, headers and data. The class <code>Request</code> can be read from the static property <code>App.IncomingMessage</code>. It can be also be overwritten as long as the value is a class that was extended from <code>Request</code>.
 <h3><code>request.body</code></h3>
-Property where the requests parsed <code>body</code> resides. The <code>body</code> is parsed by an individual <code>requestBodyParser</code>.
+Property where the request's parsed <code>body</code> is placed in. The <code>body</code> is parsed by an individual <code>requestBodyParser</code>.
+<h3><code>request.params</code></h3>
+Property where the request's path parameters are placed in. If the path to an API was <code>"/path/to/:param1/and/:param2"</code> and a request has a path of <code>"/path/to/aapje/and/12345"</code> then the params would become <code>{ param1: "aapje", param2: "12345" }</code>.
+<h3><code>request.urlSearchParams</code></h3>
+Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of "/path/to/api?param1=aapje&param2=01234&param2=56789" then the request.urlSearchParams.<a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return ["01234", "56789"].
 <h3><code>Request.bodyParsers</code></h3>
 Static readable property of the <code>Request</code>'s <code>bodyParsers</code> instance. Contains individual <code>requestBodyParser</code>.
 
