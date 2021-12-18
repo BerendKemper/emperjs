@@ -4,6 +4,7 @@ const ResponseFactory = require("./lib/response");
 const SocketFactory = require("./lib/socket");
 const ApiRegisterFactory = require("./lib/apiRegister");
 const _mimetypes = require("emperjs/lib/fileTypes");
+const httpMethods = require("./lib/httpMethods");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
 const isDerived = require("is-derived");
@@ -73,15 +74,17 @@ module.exports = (protocol, options) => {
             if (Object.prototype.toString.call(register) !== "[object Object]") throw new TypeError("param must be an object");
             const apis = apiRegister.apis;
             for (const path in apis) {
-                const api = apis[path];
-                const loadingApi = register[path];
-                register[path] = api;
-                if (reset === true)
-                    for (const method in api)
-                        api[method].reset();
-                else if (loadingApi)
-                    for (const method in api)
-                        api[method].from(loadingApi[method]);
+                if (httpMethods.has(path)) {
+                    const api = apis[path];
+                    const loadingApi = register[path];
+                    register[path] = api;
+                    if (reset === true)
+                        for (const method in api)
+                            api[method].reset();
+                    else if (loadingApi)
+                        for (const method in api)
+                            api[method].from(loadingApi[method]);
+                }
             }
             apiRegister.load(register);
             return this;
