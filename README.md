@@ -229,7 +229,7 @@ Each endpoint is recorded in an <code>ApiRecord</code> from the <code>App</code>
 	</details>
 </ul>
 Uses the <code>App</code>'s <code>logger.error</code> method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with <code>status</code> and the headers <code>"Content-Type"</code> set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
-<h3><code>response.sendFile(filepath[, end])</code></h3>
+<h3><code>response.sendFile(filepath)</code></h3>
 <ul>
 	<details>
 		<summary>
@@ -239,21 +239,15 @@ Uses the <code>App</code>'s <code>logger.error</code> method to log the <a href=
 	</details>
 	<details>
 		<summary>
-			<code>end</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> Optional
-		</summary>
-		If <code>end</code> is set to <code>false</code> the <code>response</code> is not ended. Use this to chain invoke multiple <code>sendFile</code>s.
-	</details>
-	<details>
-		<summary>
 			Returns <code>this</code> &lt;Response&gt;
 		</summary>
 		The <code>response</code> is returned to allow chain invoking multiple <code>sendFile</code>s.
 	</details>
 </ul>
-Invoke this method to <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_open_path_flags_mode_callback">open</a> a file for reading, continuously <a href="https://nodejs.org/dist/latest-v14.x/docs/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback">read</a> and <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_write_chunk_encoding_callback">write</a> chunks the size of <code>16kb</code> from the file to the <code>response</code> until reading reached the end of file which <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a>s the <code>response</code>. The <code>content-type</code> in the <code>response</code>'s header are set using <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_setheader_name_value">setHeader</a> with the corresponding <code>mimetype</code> found from the <code>App</code>'s static proeprty <code>mimetypes</code>. If the <code>mimetype</code> was not found the <code>response</code> header <code>content-type</code> is set to <code>"text/plain"</code>. In a single <code>request</code> invoking <code>sendFile</code> more than once and flagging <code>end</code> to <code>false</code> results in the different files to be appended as one file and send in chunks to the <code>response</code>. This is not the same as creating templates of files but it can provide similair results. Only the first file's <code>mimetype</code> is put in the header <code>content-type</code>. A <code>CallbackQueue</code> ensures the files are send sequentially. Do make sure the last call to <code>sendFile</code> ends the <code>request</code> by not flagging <code>end</code> to <code>false</code>.
+Invoke this method to stream files to the <code>response</code>. The <code>content-type</code> in the <code>response</code>'s header are set to the mimetype found from the file that was send, unless the <code>content-type</code> header was already set. If the mimetype was not found within the <code>App</code>'s static property <code>mimetypes</code> the <code>response</code> header's <code>content-type</code> is set to <code>"text/plain"</code>. In a single <code>response</code> invoking <code>sendFile</code> more than once results in these files to be appended as one file and send in chunks to the <code>response</code>. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to <code>sendFile</code> ends the <code>response</code>.<br><br>
+The method <code>sendFile</code> is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an unlimited number of writable contexts. The second optimization is that a single writable context can attach an unlimited number of <code>response</code>s. As the readable file reads chunks <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all <code>response</code>s that were attached to the writable context. That means that when 10 <code>response</code>s have been attached to a single writable context there will be 9 fewer chunks of <code>16kb</code> in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
 <h3><code>response.apiRecord</code></h3>
 Readable property of the endpoint's <code>apiRecord</code>
-
 <h2>Class: <code>RequestBodyParsers</code></h2>
 The <code>requestBodyParsers</code> is read from the static property <code>bodyParsers</code> from the <code>Request</code> class. The <code>requestBodyParsers</code> is map with a <code>mimetype</code> as key and a <code>requestBodyParser</code> as value.
 <h3><code>requestBodyParsers.add(mimetype, parse[, errorMessage])</code></h3>
