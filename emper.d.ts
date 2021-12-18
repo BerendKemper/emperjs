@@ -1,9 +1,11 @@
 import { Server, IncomingMessage, ServerResponse } from "http"
-new Server()
 import * as net from "net"
+type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
 class App extends Server {
     constructor(options: { insecureHTTPParser: boolean, maxHeaderSize: number })
     listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): App
+
+
     delete(path: string, callback: requestCallback): void
     get(path: string, callback: requestCallback): void
     head(path: string, callback: requestCallback): void
@@ -12,12 +14,12 @@ class App extends Server {
     post(path: string, callback: requestCallback): void
     put(path: string, callback: requestCallback): void
     /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
-    loadApiRegister(register: { [path: string]: { [method: string]: { bytes: number, counter: number } } }, reset: boolean): App
+    loadApiRegister(register: { [path: string]: { [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: { bytes: number, counter: number } } }, reset: boolean): App
     /**Destroys any ApiRecord that does not exist in a route*/
     destroyUnusedRecords(): App
     /**"http(s)://${address}:${port}*/
     get url(): string
-    get apis(): { [path: string]: { [method: string]: ApiRecord } }
+    get apis(): { [path: string]: { [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: ApiRecord } }
     static get IncomingMessage(): typeof Request
     /**Set this value to null in order to reset it to the base Request class.*/
     static set IncomingMessage(IncomingMessage: Request): void
@@ -62,6 +64,10 @@ class Socket extends net.Socket {
     get hrtimeAlive(): [number, number]
     get msTimeAlive(): number
     get remoteUrl(): string
+}
+class ApiRecordBase {
+    bytes: number
+    counter: number
 }
 class ApiRecord {
     bytes: number
