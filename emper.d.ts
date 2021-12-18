@@ -4,8 +4,6 @@ type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
 class App extends Server {
     constructor(options: { insecureHTTPParser: boolean, maxHeaderSize: number })
     listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): App
-
-
     delete(path: string, callback: requestCallback): void
     get(path: string, callback: requestCallback): void
     head(path: string, callback: requestCallback): void
@@ -57,7 +55,7 @@ class Response extends ServerResponse {
     send(data: string): void
     report(byteLength: number): Response
     sendError(status: number, error: Error): void
-    sendFile(filepath: string, end: boolean): Response
+    sendFile(filepath: string): Response
     get apiRecord(): void
 }
 class Socket extends net.Socket {
