@@ -71,18 +71,21 @@ module.exports = (protocol, options) => {
             routes.add(path, "PUT", callback).apiRecord = apiRegister.register(path, "PUT");
         }
         loadApiRegister(register, reset) {
-            if (Object.prototype.toString.call(register) !== "[object Object]") throw new TypeError("param must be an object");
+            const objToStr = Object.prototype.toString;
+            if (objToStr.call(register) !== "[object Object]")
+                throw new TypeError("param must be an object");
             const apis = apiRegister.apis;
             const recordCall = reset === true ? "reset" : "from";
-            for (const path in apis)
-                if (register[path]) {
-                    const api = apis[path];
-                    const loadingApi = register[path];
-                    register[path] = api;
-                    for (const method in api)
-                        if (httpMethods.has(method))
-                            api[method][recordCall](loadingApi[method]);
-                }
+            for (const path in apis) {
+                const api = apis[path];
+                const loadingApi = objToStr.call(register[path]) === "[object Object]"
+                    ? register[path]
+                    : {};
+                register[path] = api;
+                for (const method in api)
+                    if (httpMethods.has(method))
+                        api[method][recordCall](loadingApi[method]);
+            }
             apiRegister.load(register);
             return this;
         }
