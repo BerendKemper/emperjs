@@ -73,19 +73,16 @@ module.exports = (protocol, options) => {
         loadApiRegister(register, reset) {
             if (Object.prototype.toString.call(register) !== "[object Object]") throw new TypeError("param must be an object");
             const apis = apiRegister.apis;
-            for (const path in apis) {
-                if (httpMethods.has(path)) {
+            const recordCall = reset === true ? "reset" : "from";
+            for (const path in apis)
+                if (register[path]) {
                     const api = apis[path];
                     const loadingApi = register[path];
                     register[path] = api;
-                    if (reset === true)
-                        for (const method in api)
-                            api[method].reset();
-                    else if (loadingApi)
-                        for (const method in api)
-                            api[method].from(loadingApi[method]);
+                    for (const method in api)
+                        if (httpMethods.has(method))
+                            api[method][recordCall](loadingApi[method]);
                 }
-            }
             apiRegister.load(register);
             return this;
         }
