@@ -4,13 +4,13 @@ type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
 class App extends Server {
     constructor(options: { insecureHTTPParser: boolean, maxHeaderSize: number })
     listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): App
-    delete(path: string, callback: requestCallback): void
-    get(path: string, callback: requestCallback): void
-    head(path: string, callback: requestCallback): void
-    options(path: string, callback: requestCallback): void
-    patch(path: string, callback: requestCallback): void
-    post(path: string, callback: requestCallback): void
-    put(path: string, callback: requestCallback): void
+    delete(path: string, callback: requestCallback, options: requestOptions): void
+    get(path: string, callback: requestCallback, options: requestOptions): void
+    head(path: string, callback: requestCallback, options: requestOptions): void
+    options(path: string, callback: requestCallback, options: requestOptions): void
+    patch(path: string, callback: requestCallback, options: requestOptions): void
+    post(path: string, callback: requestCallback, options: requestOptions): void
+    put(path: string, callback: requestCallback, options: requestOptions): void
     /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
     loadApiRegister(register: { [path: string]: { [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: { bytes: number, counter: number } } }, reset: boolean): App
     /**Destroys any ApiRecord that does not exist in a route*/
@@ -37,6 +37,7 @@ class App extends Server {
 }
 type AppFactory = (protocol: string, options: {}) => typeof App
 type requestCallback = (request: Request, response: Response) => void
+type requestOptions = { record: false }
 class Request extends IncomingMessage {
     socket: Socket
     connection: Socket

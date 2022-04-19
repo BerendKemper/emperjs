@@ -39,36 +39,40 @@ module.exports = (protocol, options) => {
             this.once("listening", listeningListener);
         }
         listen(options = {}, listeningListener = () => console.log(`Listening on: ${this.url}`)) {
-            const { hostname: host = "127.0.0.1", port = protocol === "https" ? 8081 : 8080, backlog = null } = options ?? {};
-            return super.listen({ port, host, backlog }, listeningListener);
+            return super.listen({
+                port: options?.port || protocol === "https" ? 8081 : 8080,
+                host: options?.hostname || options?.host || "127.0.0.1",
+                backlog: options?.backlog || null
+            }, listeningListener);
         }
-        delete(path, callback) {
+        delete(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "DELETE", callback).apiRecord = apiRegister.register(path, "DELETE");
+            routes.add(path, "DELETE", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "DELETE");
         }
-        get(path, callback) {
+        get(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "GET", callback).apiRecord = apiRegister.register(path, "GET");
+            routes.add(path, "GET", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "GET");
+            console.log(path, callback.apiRecord)
         }
-        head(path, callback) {
+        head(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "HEAD", callback).apiRecord = apiRegister.register(path, "HEAD");
+            routes.add(path, "HEAD", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "HEAD");
         }
-        options(path, callback) {
+        options(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "OPTIONS", callback).apiRecord = apiRegister.register(path, "OPTIONS");
+            routes.add(path, "OPTIONS", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "OPTIONS");
         }
-        patch(path, callback) {
+        patch(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "PATCH", callback).apiRecord = apiRegister.register(path, "PATCH");
+            routes.add(path, "PATCH", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "PATCH");
         }
-        post(path, callback) {
+        post(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "POST", callback).apiRecord = apiRegister.register(path, "POST");
+            routes.add(path, "POST", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "POST");
         }
-        put(path, callback) {
+        put(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "PUT", callback).apiRecord = apiRegister.register(path, "PUT");
+            routes.add(path, "PUT", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "PUT");
         }
         loadApiRegister(register, reset) {
             const objToStr = Object.prototype.toString;
@@ -94,7 +98,7 @@ module.exports = (protocol, options) => {
             for (const path in apis) {
                 const api = apis[path];
                 for (const method in api)
-                    if (!routes.has(path, method))
+                    if (!(routes.has(path, method)?.apiRecord))
                         delete (api[method]);
                 if (Object.keys(api).length === 0)
                     delete (apis[path]);
