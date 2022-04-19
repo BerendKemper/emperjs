@@ -62,7 +62,12 @@ const app = new App();
                     <summary>
                         <code>listeningListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
                     </summary>
-                    <div><b><code>function listeningListener() {}</code></b></div>
+                    <pre>
+
+                    ```javascript
+                        function listeningListener() {}
+                    ```
+</pre>
                     The callback that is invoked when the server is listening.
                 </details>
             </ul>
