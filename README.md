@@ -16,7 +16,7 @@ const app = new App();
 		<summary>
 			<code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
 		</summary>
-		The <code>protocol</code> is <code>http</code> or <code>https</code>. The factory created class <code>App</code> extends dynamically from the protocol's Server class.
+		The <code>protocol</code> is http or https. The factory created class App extends dynamically from the protocol's Server class.
 	</details>
 	<details>
 		<summary>
@@ -50,6 +50,7 @@ Creates a class <code>App</code>. <code>App</code> is described below.
 				<summary>
 					<code>listeningListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
 				</summary>
+                <div><b><code>function listeningListener() {}</code></b></div>
 				The callback that is invoked when the server is listening.
 			</details>
 		</ul>
@@ -74,6 +75,7 @@ Starts the webserver listening for connections.
 		<summary>
 			<code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
 		</summary>
+        <b><code>function callback(request, response) {}</code></b>
 		<ul>
 			<details>
 				<summary>
@@ -89,21 +91,34 @@ Starts the webserver listening for connections.
 			</details>
 		</ul>
 	</details>
+    <details>
+        <summary>
+            <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
+        </summary>
+        <ul>
+			<details>
+				<summary>
+					<code>record</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+				</summary>
+                If set to false it is excluded in the ApiRegister and no record is reported to.
+			</details>
+		</ul>
+    </details>
 </ul>
 An <code>incomming request</code> that has found it's route to this <code>path</code> and it's corresponding <code>HTTP method</code> invokes that <code>callback</code>. If the request's <code>path</code> does not exist the <code>response</code> return with status <code>400</code> and specifies which part of the <code>path</code> was not identified, else if the request's <code>HTTP method</code> does not exist the <code>response</code> return with status <code>405</code> method not allowed.
-<h3><code>app.delete(path, callback)</code></h3>
+<h3><code>app.delete(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a DELETE method at <code>path</code>.
-<h3><code>app.get(path, callback)</code></h3>
+<h3><code>app.get(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a GET method at <code>path</code>.
-<h3><code>app.head(path, callback)</code></h3>
+<h3><code>app.head(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a HEAD method at <code>path</code>.
-<h3><code>app.options(path, callback)</code></h3>
+<h3><code>app.options(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a OPTIONS method at <code>path</code>.
-<h3><code>app.patch(path, callback)</code></h3>
+<h3><code>app.patch(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a PATCH method at <code>path</code>.
-<h3><code>app.post(path, callback)</code></h3>
+<h3><code>app.post(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a POST method at <code>path</code>.
-<h3><code>app.put(path, callback)</code></h3>
+<h3><code>app.put(path, callback[, options])</code></h3>
 Places the <code>callback</code> as a PUT method at <code>path</code>.
 <h3><code>app.loadApiRegister(register, reset)</code></h3>
 <ul>
@@ -187,88 +202,115 @@ This object is created internally by the server. It is passed as the second para
 	</details>
 </ul>
 Sends a json object back to the <code>response</code>. This method invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with <code>status</code> and the headers <code>"Content-Type"</code> set to <code>"application/json"</code> and invokes the <code>send</code> method.
-<h3><code>response.send(data)</code></h3>
-<ul>
-	<details>
-		<summary>
-			<code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">&lt;Buffer&gt;</a>
-		</summary>
-		A <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_from_string_encoding">Buffer</a> is created from <code>data</code> if it is a string and it's byte <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> is passed over to the method <code>report</code>.
-	</details>
-</ul>
-Invokes the <code>response</code>'s <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> and the <code>report</code> method.
-<h3><code>response.report(byteLength)</code></h3>
-<ul>
-	<details>
-		<summary>
-			<code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
-		</summary>
-		A <code>byteLength</code> can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
-	</details>
-    <details>
-        <summary>
-            Returns <code>this</code> &lt;Response&gt;
-        </summary>
-        Allows chaining methods.
-    </details>
-</ul>
-Each endpoint is recorded in an <code>ApiRecord</code> from the <code>App</code>'s <code>ApiRegister</code>. Invoking <code>report</code> increments the <code>apiRecord</code>'s counter</code> property and adds the <code>byteLength</code> to the <code>apiRecord</code>'s <code>bytes</code> property.
-<h3><code>response.sendError(status, error)</code></h3>
-<ul>
-	<details>
-		<summary>
-			<code>status</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
-		</summary>
-		<a href ="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP response status codes</a>
-	</details>
-	<details>
-		<summary>
-			<code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
-		</summary>
-		This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
-	</details>
-</ul>
-Uses the <code>App</code>'s <code>logger.error</code> method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with <code>status</code> and the headers <code>"Content-Type"</code> set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
-<h3><code>response.sendFile(filepath)</code></h3>
-<ul>
-	<details>
-		<summary>
-			<code>filepath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
-		</summary>
-		If a file does not exist at <code>filepath</code> the <code>response</code>'s <code>sendError</code> is invoked with status <code>404</code>.
-	</details>
-	<details>
-		<summary>
-			Returns <code>this</code> &lt;Response&gt;
-		</summary>
-		The <code>response</code> is returned to allow chain invoking multiple <code>sendFile</code>s.
-	</details>
-</ul>
-Invoke this method to stream files to the <code>response</code>. The <code>content-type</code> in the <code>response</code>'s header are set to the mimetype found from the file that was send, unless the <code>content-type</code> header was already set. If the mimetype was not found within the <code>App</code>'s static property <code>mimetypes</code> the <code>response</code> header's <code>content-type</code> is set to <code>"text/plain"</code>. In a single <code>response</code> invoking <code>sendFile</code> more than once results in these files to be appended as one file and send in chunks to the <code>response</code>. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to <code>sendFile</code> ends the <code>response</code>.<br><br>
-The method <code>sendFile</code> is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an unlimited number of writable contexts. The second optimization is that a single writable context can attach an unlimited number of <code>response</code>s. As the readable file reads chunks <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all <code>response</code>s that were attached to the writable context. That means that when 10 <code>response</code>s have been attached to a single writable context there will be 9 fewer chunks of <code>16kb</code> in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
+
+<div>
+    <h3><code>response.send(data)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">&lt;Buffer&gt;</a>
+            </summary>
+            A <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_from_string_encoding">Buffer</a> is created from data if it is a string and it's byte <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> is passed over to the method report.
+        </details>
+    </ul>
+    Invokes the response's <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> and the report method.
+</div>
+
+<div>
+    <h3><code>response.report(byteLength)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
+            </summary>
+            A <code>byteLength</code> can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
+        </details>
+        <details>
+            <summary>
+                Returns <code>this</code> &lt;Response&gt;
+            </summary>
+            Allows chaining methods.
+        </details>
+    </ul>
+    <div>
+        Each endpoint is recorded in an <code>ApiRecord</code> from the <code>App</code>'s <code>ApiRegister</code>. Invoking <code>report</code> increments the <code>apiRecord</code>'s counter</code> property and adds the <code>byteLength</code> to the <code>apiRecord</code>'s <code>bytes</code> property.
+    </div>
+</div>
+
+<div>
+    <h3><code>response.sendError(status, error)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>status</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
+            </summary>
+            <a href ="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP response status codes</a>
+        </details>
+        <details>
+            <summary>
+                <code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+            </summary>
+            This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
+        </details>
+    </ul>
+    <div>
+        Uses the App's logger.error method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with status and the headers content-type set to <code>text/plain</code> and invokes the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
+    </div>
+</div>
+
+<div>
+    <h3><code>response.sendFile(filepath)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>filepath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
+            </summary>
+            If a file does not exist at filepath the response's sendError is invoked with status <code>404</code>.
+        </details>
+        <details>
+            <summary>
+                Returns <code>this</code> &lt;Response&gt;
+            </summary>
+            The response is returned to allow chain invoking multiple calls to sendFile.
+        </details>
+    </ul>
+    <div>
+        Invoke this method to stream files to the response. The response content-type header are set to the mimetype found from the file that was send, unless the content-type header was already set. If the mimetype was not found within the static property App.mimetypes the response content-type header is set to <code>text/plain</code>. In a single response invoking sendFile more than once results in these files to be appended as one file and send in chunks to the response. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to sendFile ends the response.
+    </div>
+    <div>
+        The method sendFile is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an x number of writable contexts. The second optimization is that a single writable context can attach an x number of responses. As the readable file reads chunks <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all responses that were attached to the writable context. That means that when 10 responses have been attached to a single writable context there will be 9 fewer chunks of 16kb in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
+    </div>
+</div>
+
 <h3><code>response.apiRecord</code></h3>
-Readable property of the endpoint's <code>apiRecord</code>
+Readable property of the apiRecord for the endpoint.
+
 <h2>Class: <code>RequestBodyParsers</code></h2>
-The <code>requestBodyParsers</code> is read from the static property <code>bodyParsers</code> from the <code>Request</code> class. The <code>requestBodyParsers</code> is map with a <code>mimetype</code> as key and a <code>requestBodyParser</code> as value.
+The requestBodyParsers is read from the static property bodyParsers from the Request class.
+
+<h3><code>requestBodyParsers[mimetype]</code></h3>
+Readable properties containing a requestBodyParser.
+
 <h3><code>requestBodyParsers.add(mimetype, parse[, errorMessage])</code></h3>
 <ul>
 	<details>
 		<summary>
 			<code>mimetype</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
 		</summary>
-		This <code>requestBodyParser</code> is internally accessed by using the <code>mimetype</code> as key.
+		A requestBodyParser is accessed by using the mimetype as locator.
 	</details>
 	<details>
 		<summary>
 			<code>parse</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
 		</summary>
-		This <code>requestBodyParser</code> uses this <code>parse</code> function in order to parse data from incomming requests and put the parsed data in <code>request</code>.<code>body</code>.
+        <div><b><code>function parse(body) {}</code></b></div>
+		This requestBodyParser uses this parse function in order to parse data from incomming requests and put the parsed data in request.body. These parse functions wrapped in a try catch.
 	</details>
 	<details>
 		<summary>
 			<code>errorMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a> Optional
 		</summary>
-		If an <code>errorMessage</code> is given and the <code>requestBodyParser</code> would fail at parsing an error with this <code>errorMessage</code> is send to the <code>response</code> with the method <code>sendError</code>, otherwise the error thrown by the parser itself is send.
+		In case the parse function got an error when parsing this errorMessage is send to the response with the method request.sendError, otherwise the error that was catched by the parser itself is send.
 	</details>
     <details>
         <summary>
@@ -277,7 +319,7 @@ The <code>requestBodyParsers</code> is read from the static property <code>bodyP
         Allows chaining methods.
     </details>
 </ul>
-Use this method to add a new <code>requestBodyParser</code>. On default <code>requestBodyParsers</code> has a <code>requestBodyParser</code> for <code>content-type</code> <code>application/json</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for <code>content-type</code> <code>application/x-www-form-urlencoded</code> that parses with <a href="https://nodejs.org/dist/latest-v14.x/docs/api/querystring.html#querystring_querystring_parse_str_sep_eq_options">querystring.parse</a>.
+Use this method to add a new requestBodyParser. By default requestBodyParsers exist for content-type <code>application/json</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for content-type <code>application/x-www-form-urlencoded</code> that parses with <a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>.
 
 <h2>Class: <code>ApiRecord</code></h2>
 Every HTTP method published is stored in the <code>App</code>'s <code>ApiRegister</code> as an <code>ApiRecord</code>. Every <code>apiRecord</code> stores and updates information from the server's endpoints. This class can be read from the static property <code>App.ApiRecord</code>.
