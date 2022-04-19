@@ -10,138 +10,164 @@ const app = new App();
 const App = require("emperjs")("http");
 const app = new App();
 ```
-<h2>AppFactory(protocol)</h2>
-<ul>
-	<details>
-		<summary>
-			<code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
-		</summary>
-		The <code>protocol</code> is http or https. The factory created class App extends dynamically from the protocol's Server class.
-	</details>
-	<details>
-		<summary>
-			<code>Returns</code> &lt;App&gt;
-		</summary>
-        The factory creates a class <code>App</code>.
-	</details>
-</ul>
-Creates a class <code>App</code>. <code>App</code> is described below.
-<h2>Class: <code>App</code></h2>
-<ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_server">http.Server</a> | <a href="https://nodejs.org/dist/latest-v14.x/docs/api/https.html#https_class_https_server">https.Server</a></li></ul>
-<h3><code>new App()</code></h3>
-<h3><code>app.listen(options)</code></h3>
-<ul>
-	<details>
-		<summary>
-			<code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
-		</summary>
-		<ul>
-			<details>
-				<summary>
-					<code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a> Default: <code>8080</code>
-				</summary>
-			</details>
-			<details>
-				<summary>
-					<code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>127.0.0.1</code>
-				</summary>
-			</details>
-			<details>
-				<summary>
-					<code>listeningListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
-				</summary>
-                <div><b><code>function listeningListener() {}</code></b></div>
-				The callback that is invoked when the server is listening.
-			</details>
-		</ul>
-	</details>
-    <details>
-        <summary>
-            Returns <code>this</code> &lt;App&gt;
-        </summary>
-        Allows chaining methods.
-    </details>
-</ul>
-Starts the webserver listening for connections.
-<h3>HTTP methods:</h3>
-<ul>
-	<details>
-		<summary>
-			<code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
-		</summary>
-		Variable parameters are indicated by a forward slash folllowed by a colon, such as /:<code>param</code>. Parameters are added to the <code>request</code>.<code>params</code> object.
-	</details>
-	<details>
-		<summary>
-			<code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
-		</summary>
-        <b><code>function callback(request, response) {}</code></b>
-		<ul>
-			<details>
-				<summary>
-					<code>request</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Request&gt;</a>
-				</summary>
-				An instance of the class from the <code>App</code>.<code>IncomingMessage</code>.
-			</details>
-			<details>
-				<summary>
-					<code>response</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Response&gt;</a>
-				</summary>
-				An instance of the class from the <code>App</code>.<code>ServerResponse</code>.
-			</details>
-		</ul>
-	</details>
-    <details>
-        <summary>
-            <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
-        </summary>
-        <ul>
-			<details>
-				<summary>
-					<code>record</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
-				</summary>
-                If set to false it is excluded in the ApiRegister and no record is reported to.
-			</details>
-		</ul>
-    </details>
-</ul>
-An <code>incomming request</code> that has found it's route to this <code>path</code> and it's corresponding <code>HTTP method</code> invokes that <code>callback</code>. If the request's <code>path</code> does not exist the <code>response</code> return with status <code>400</code> and specifies which part of the <code>path</code> was not identified, else if the request's <code>HTTP method</code> does not exist the <code>response</code> return with status <code>405</code> method not allowed.
-<h3><code>app.delete(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a DELETE method at <code>path</code>.
-<h3><code>app.get(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a GET method at <code>path</code>.
-<h3><code>app.head(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a HEAD method at <code>path</code>.
-<h3><code>app.options(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a OPTIONS method at <code>path</code>.
-<h3><code>app.patch(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a PATCH method at <code>path</code>.
-<h3><code>app.post(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a POST method at <code>path</code>.
-<h3><code>app.put(path, callback[, options])</code></h3>
-Places the <code>callback</code> as a PUT method at <code>path</code>.
-<h3><code>app.loadApiRegister(register, reset)</code></h3>
-<ul>
-	<details>
-		<summary>
-			<code>register</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
-		</summary>
-		Throws a TypeError when <code>register</code> is not an object.
-	</details>
-	<details>
-		<summary>
-			<code>reset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
-		</summary>
-		If <code>reset</code> is <code>true</code> sets every endpoint's <code>counter</code> and <code>bytes</code> property to <code>0</code>.
-	</details>
-    <details>
-        <summary>
-            Returns <code>this</code> &lt;App&gt;
-        </summary>
-        Allows chaining methods.
-    </details>
-</ul>
-Loads an external object to replace the <code>app</code>'s <code>apis</code> property from the <code>app</code>'s <code>apiRegister</code>.
+<div>
+    <h2>AppFactory(protocol)</h2>
+    <ul>
+        <details>
+            <summary>
+                <code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>http</code>
+            </summary>
+            The protocol is <code>http</code> or <code>https</code>. The factory created class App extends dynamically from the protocol's Server class.
+        </details>
+        <details>
+            <summary>
+                <code>Returns</code> &lt;App&gt;
+            </summary>
+            The factory creates a class App.
+        </details>
+    </ul>
+    <div>
+        Creates a class App. The App is described below.
+    </div>
+</div>
+
+<div>
+    <h2>Class: <code>App</code></h2>
+    <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_server">http.Server</a> | <a href="https://nodejs.org/dist/latest-v14.x/docs/api/https.html#https_class_https_server">https.Server</a></li></ul>
+</div>
+
+<div>
+    <h3><code>new App()</code></h3>
+</div>
+
+<div>
+    <h3><code>app.listen(options)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+            </summary>
+            <ul>
+                <details>
+                    <summary>
+                        <code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a> Default: <code>8080</code>
+                    </summary>
+                </details>
+                <details>
+                    <summary>
+                        <code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>127.0.0.1</code>
+                    </summary>
+                </details>
+                <details>
+                    <summary>
+                        <code>listeningListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+                    </summary>
+                    <div><b><code>function listeningListener() {}</code></b></div>
+                    The callback that is invoked when the server is listening.
+                </details>
+            </ul>
+        </details>
+        <details>
+            <summary>
+                Returns <code>this</code> &lt;App&gt;
+            </summary>
+            Allows chaining methods.
+        </details>
+    </ul>
+    <div>
+        Starts the webserver listening for connections.
+    </div>
+</div>
+
+<div>
+    <h3>HTTP methods:</h3>
+    <ul>
+        <details>
+            <summary>
+                <code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
+            </summary>
+            Variable parameters are indicated by a forward slash folllowed by a colon, such as /:<code>param</code>. Parameters are added to the <code>request</code>.<code>params</code> object.
+        </details>
+        <details>
+            <summary>
+                <code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+            </summary>
+            <b><code>function callback(request, response) {}</code></b>
+            <ul>
+                <details>
+                    <summary>
+                        <code>request</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Request&gt;</a>
+                    </summary>
+                    An instance of the class from the <code>App</code>.<code>IncomingMessage</code>.
+                </details>
+                <details>
+                    <summary>
+                        <code>response</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Response&gt;</a>
+                    </summary>
+                    An instance of the class from the <code>App</code>.<code>ServerResponse</code>.
+                </details>
+            </ul>
+        </details>
+        <details>
+            <summary>
+                <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
+            </summary>
+            <ul>
+                <details>
+                    <summary>
+                        <code>record</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+                    </summary>
+                    If set to false it is excluded in the ApiRegister and no record is reported to.
+                </details>
+            </ul>
+        </details>
+    </ul>
+    <div>
+        An incomming request that has found it's route to the path and the corresponding HTTP method invokes the callback. If the request's path does not exist the response return with status <code>400</code> and specifies which part of the path was not identified, else if the request's HTTP method does not exist the response return with status <code>405</code> method not allowed.
+    </div>
+    <h3><code>app.delete(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a DELETE method at <code>path</code>.
+    <h3><code>app.get(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a GET method at <code>path</code>.
+    <h3><code>app.head(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a HEAD method at <code>path</code>.
+    <h3><code>app.options(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a OPTIONS method at <code>path</code>.
+    <h3><code>app.patch(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a PATCH method at <code>path</code>.
+    <h3><code>app.post(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a POST method at <code>path</code>.
+    <h3><code>app.put(path, callback[, options])</code></h3>
+    Places the <code>callback</code> as a PUT method at <code>path</code>.
+</div>
+
+<div>
+    <h3><code>app.loadApiRegister(register, reset)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>register</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+            </summary>
+            Throws a TypeError when register is not an object.
+        </details>
+        <details>
+            <summary>
+                <code>reset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+            </summary>
+            If reset is <code>true</code> sets every endpoint's counter and bytes property to <code>0</code>.
+        </details>
+        <details>
+            <summary>
+                Returns <code>this</code> &lt;App&gt;
+            </summary>
+            Allows chaining methods.
+        </details>
+    </ul>
+    <div>
+        Loads an external object to replace the app's apiRegister.
+    </div>
+</div>
+
 <h3><code>app.destroyUnusedRecords()</code></h3>
 <ul>
     <details>
