@@ -21,7 +21,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                <code>Returns</code> &lt;App&gt;
+                <code>Returns</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
             The factory creates a class App.
         </details>
@@ -96,13 +96,13 @@ const app = new App();
             <ul>
                 <details>
                     <summary>
-                        <code>request</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Request&gt;</a>
+                        <code>request</code> <a href="#class-request">&lt;Request&gt;</a>
                     </summary>
                     An instance of the class from the App.IncomingMessage.
                 </details>
                 <details>
                     <summary>
-                        <code>response</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Response&gt;</a>
+                        <code>response</code> <a href="#class-response">&lt;Response&gt;</a>
                     </summary>
                     An instance of the class from the App.ServerResponse.
                 </details>
@@ -193,7 +193,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> &lt;App&gt;
+                Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
             Allows chaining methods.
         </details>
@@ -208,7 +208,7 @@ const app = new App();
     <ul>
         <details>
             <summary>
-                Returns <code>this</code> &lt;App&gt;
+                Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
             Allows chaining methods.
         </details>
@@ -367,7 +367,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> &lt;Response&gt;
+                Returns <code>this</code> <a href="#class-response">&lt;Response&gt;</a>
             </summary>
             Allows chaining methods.
         </details>
@@ -388,9 +388,9 @@ const app = new App();
         </details>
         <details>
             <summary>
-                <code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+                <code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a>
             </summary>
-            This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
+            This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
         </details>
     </ul>
     <div>
@@ -409,7 +409,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> &lt;Response&gt;
+                Returns <code>this</code> <a href="#class-response">&lt;Response&gt;</a>
             </summary>
             The response is returned to allow chain invoking multiple calls to sendFile.
         </details>
@@ -467,7 +467,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> &lt;RequestBodyParsers&gt;
+                Returns <code>this</code> <a href="#class-requestbodyparsers">&lt;RequestBodyParsers&gt;</a>
             </summary>
             Allows chaining methods.
         </details>
