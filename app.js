@@ -29,8 +29,10 @@ module.exports = (protocol, options) => {
     let app = false;
     return class App extends http.Server {
         constructor(options = {}) {
-            if (app === (app = true)) throw new Error("An App can only create one instance");
-            if (Object.prototype.toString.call(options) !== "[object Object]") throw new TypeError("param must be an object");
+            if (app === (app = true))
+                throw new Error("An App can only create one instance");
+            if (Object.prototype.toString.call(options) !== "[object Object]")
+                throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;
             super(options, requestListener);
@@ -52,7 +54,6 @@ module.exports = (protocol, options) => {
         get(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
             routes.add(path, "GET", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "GET");
-            console.log(path, callback.apiRecord)
         }
         head(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
