@@ -117,7 +117,7 @@ const app = new App();
                     <summary>
                         <code>record</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
                     </summary>
-                    If set to false it is excluded in the ApiRegister and no record is reported to.
+                    If set to <code>false</code> it is excluded in the ApiRegister and no record is reported to.
                 </details>
             </ul>
         </details>
