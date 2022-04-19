@@ -69,7 +69,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> &lt;App&gt;
+                Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
             Allows chaining methods.
         </details>
