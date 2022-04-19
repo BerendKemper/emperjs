@@ -86,7 +86,7 @@ const app = new App();
             <summary>
                 <code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
             </summary>
-            Variable parameters are indicated by a forward slash folllowed by a colon, such as /:<code>param</code>. Parameters are added to the <code>request</code>.<code>params</code> object.
+            Variable parameters are indicated by a forward slash folllowed by a colon, such as <code>/:param1</code>. Parameters are added to the request.params object.
         </details>
         <details>
             <summary>
@@ -98,13 +98,13 @@ const app = new App();
                     <summary>
                         <code>request</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Request&gt;</a>
                     </summary>
-                    An instance of the class from the <code>App</code>.<code>IncomingMessage</code>.
+                    An instance of the class from the App.IncomingMessage.
                 </details>
                 <details>
                     <summary>
                         <code>response</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Response&gt;</a>
                     </summary>
-                    An instance of the class from the <code>App</code>.<code>ServerResponse</code>.
+                    An instance of the class from the App.ServerResponse.
                 </details>
             </ul>
         </details>
@@ -126,19 +126,33 @@ const app = new App();
         An incomming request that has found it's route to the path and the corresponding HTTP method invokes the callback. If the request's path does not exist the response return with status <code>400</code> and specifies which part of the path was not identified, else if the request's HTTP method does not exist the response return with status <code>405</code> method not allowed.
     </div>
     <h3><code>app.delete(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a DELETE method at <code>path</code>.
+    <div>
+        Places the callback as a DELETE method at the specified path.
+    </div>
     <h3><code>app.get(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a GET method at <code>path</code>.
+    <div>
+        Places the callback as a GET method at the specified path.
+    </div>
     <h3><code>app.head(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a HEAD method at <code>path</code>.
+    <div>
+        Places the callback as a HEAD method at the specified path.
+    </div>
     <h3><code>app.options(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a OPTIONS method at <code>path</code>.
+    <div>
+        Places the callback as a OPTIONS method at the specified path.
+    </div>
     <h3><code>app.patch(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a PATCH method at <code>path</code>.
+    <div>
+        Places the callback as a PATCH method at the specified path.
+    </div>
     <h3><code>app.post(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a POST method at <code>path</code>.
+    <div>
+        Places the callback as a POST method at the specified path.
+    </div>
     <h3><code>app.put(path, callback[, options])</code></h3>
-    Places the <code>callback</code> as a PUT method at <code>path</code>.
+    <div>
+        Places the callback as a PUT method at the specified path.
+    </div>
 </div>
 
 <div>
