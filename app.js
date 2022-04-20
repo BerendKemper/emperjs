@@ -7,7 +7,6 @@ const _mimetypes = require("emperjs/lib/fileTypes");
 const httpMethods = require("./lib/httpMethods");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
-const isDerived = require("is-derived");
 /**@type {import("emperjs/emper").AppFactory}*/
 module.exports = (protocol, options) => {
     var http = require("http");
@@ -117,16 +116,20 @@ module.exports = (protocol, options) => {
             return EmperRequest;
         }
         static set IncomingMessage(OwnIncomingMessage) {
-            if (OwnIncomingMessage === null) return EmperRequest = Request;
-            else if (!isDerived(OwnIncomingMessage, Request)) throw TypeError(`The parameter IncomingMessage is not derived from Request`);
+            if (OwnIncomingMessage === null)
+                return EmperRequest = Request;
+            else if (!Object.create(OwnIncomingMessage.prototype) instanceof Request)
+                throw TypeError(`The parameter IncomingMessage is not derived from Request`);
             EmperRequest = OwnIncomingMessage;
         }
         static get ServerResponse() {
             return EmperResponse;
         }
         static set ServerResponse(OwnServerResponse) {
-            if (OwnServerResponse === null) return EmperResponse = Response;
-            else if (!isDerived(OwnServerResponse, Response)) throw TypeError(`The parameter ServerResponse is not a child of Response`);
+            if (OwnServerResponse === null)
+                return EmperResponse = Response;
+            else if (!Object.create(OwnServerResponse.prototype) instanceof Response)
+                throw TypeError(`The parameter ServerResponse is not a child of Response`);
             EmperResponse = OwnServerResponse;
         }
         static get Socket() {

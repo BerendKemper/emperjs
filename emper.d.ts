@@ -1,9 +1,9 @@
 import { Server, IncomingMessage, ServerResponse } from "http"
 import * as net from "net"
 type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
-class App extends Server {
+export class App extends Server {
     constructor(options: { insecureHTTPParser: boolean, maxHeaderSize: number })
-    listen(options: { port: number, hostname: string, backlog: number }, listeningListener: function(): void): App
+    listen(options: { port: number, hostname: string, backlog: number }, listeningListener: () => void): App
     delete(path: string, callback: requestCallback, options: requestOptions): void
     get(path: string, callback: requestCallback, options: requestOptions): void
     head(path: string, callback: requestCallback, options: requestOptions): void
@@ -20,20 +20,20 @@ class App extends Server {
     get apis(): { [path: string]: { [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: ApiRecord } }
     static get IncomingMessage(): typeof Request
     /**Set this value to null in order to reset it to the base Request class.*/
-    static set IncomingMessage(IncomingMessage: Request): void
+    static set IncomingMessage(IncomingMessage: Request)
     static get ServerResponse(): typeof Response
     /**Set this value to null in order to reset it to the base Response class.*/
-    static set ServerResponse(ServerResponse: Response): void
+    static set ServerResponse(ServerResponse: Response)
     static get Socket(): typeof Socket
     /**Set this value to null in order to reset it to the base Socket class.*/
-    static set Socket(Socket: Socket): void
+    static set Socket(Socket: Socket)
     static get ApiRecord(): typeof ApiRecord
     /**The ApiRecord holds information on the api endpoint. Build in are a counter and bytes. The bytes represents te amount of bytes written from the server to sockets. Set this value to null in order to reset it to the base ApiRecord class.*/
-    static set ApiRecord(ApiRecord: ApiRecord): void
+    static set ApiRecord(ApiRecord: ApiRecord)
     static get logger(): logger
     static get mimetypes(): { [ext: string]: string }
     /**Add mimetypes to the dictionary. The mimetypes enables detecting the content-type by the extension from a file and is used in the response's sendFile method.*/
-    static set mimetypes(mimetypes: { [ext: string]: string }): void
+    static set mimetypes(mimetypes: { [ext: string]: string })
 }
 type AppFactory = (protocol: string, options: {}) => typeof App
 type requestCallback = (request: Request, response: Response) => void
@@ -60,8 +60,6 @@ class Response extends ServerResponse {
     get apiRecord(): void
 }
 class Socket extends net.Socket {
-    get hrtimeAlive(): [number, number]
-    get msTimeAlive(): number
     get remoteUrl(): string
 }
 class ApiRecordBase {
