@@ -22,7 +22,7 @@
     },
     "homepage": "https://github.com/BerendKemper/emperjs#readme",
     "dependencies": {
-        "ca11back-queue": "^1.4.1"
+        "ca11back-queue": "^1.4.2"
     },
     "engines": {
         "node": ">14.0.0"
