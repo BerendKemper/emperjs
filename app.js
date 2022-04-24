@@ -17,7 +17,6 @@ module.exports = (protocol, options) => {
     const Request = RequestFactory(context);
     const Response = ResponseFactory(context);
     let EmperRequest = Request;
-    const requestListener = Request.listener();
     let EmperResponse = Response;
     const SocketModule = SocketFactory(context);
     const listeningListener = SocketModule.listeningListener();
@@ -34,7 +33,7 @@ module.exports = (protocol, options) => {
                 throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;
-            super(options, requestListener);
+            super(options, context.requestListener);
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
             this.once("listening", listeningListener);
