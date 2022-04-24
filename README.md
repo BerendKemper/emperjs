@@ -11,19 +11,38 @@ const App = require("emperjs")("http");
 const app = new App();
 ```
 <div>
-    <h2>AppFactory(protocol)</h2>
+    <h2>AppFactory(protocol[, options])</h2>
     <ul>
         <details>
             <summary>
                 <code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
             </summary>
-            The protocol is <code>"http"</code> or <code>"https"</code>. The factory created class App extends dynamically from the protocol's Server class.
+            <div>
+                The protocol is <code>"http"</code> or <code>"https"</code>. The factory created class App extends dynamically from the protocol's Server class.
+            </div>
+        </details>
+        <details>
+            <summary>
+                <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
+            </summary>
+            <ul>
+                <details>
+                    <summary>
+                        <code>logger</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+                    </summary>
+                    <div>
+                        If <code>false</code> the server does not log when the request starts and when the response ends.
+                    </div>
+                </details>
+            </ul>
         </details>
         <details>
             <summary>
                 <code>Returns</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
-            The factory creates a class App.
+            <div>
+                The factory creates a class App.
+            </div>
         </details>
     </ul>
     <div>
@@ -63,7 +82,9 @@ const app = new App();
                         <code>listeningListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
                     </summary>
                     <div><b><code>function listeningListener() {}</code></b></div>
-                    The callback that is invoked when the server is listening.
+                    <div>
+                        The callback that is invoked when the server is listening.
+                    </div>
                 </details>
             </ul>
         </details>
@@ -71,11 +92,62 @@ const app = new App();
             <summary>
                 Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
-            Allows chaining methods.
+            <div>
+                Allows chaining methods.
+            </div>
         </details>
     </ul>
     <div>
         Starts the webserver listening for connections.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.delete(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a DELETE method at the specified path.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.get(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a GET method at the specified path.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.head(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a HEAD method at the specified path.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.options(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a OPTIONS method at the specified path.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.patch(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a PATCH method at the specified path.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.post(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a POST method at the specified path.
+    </div>
+</div>
+
+<div>
+    <h3><code>app.put(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <div>
+        Places the callback as a PUT method at the specified path.
     </div>
 </div>
 
@@ -86,7 +158,9 @@ const app = new App();
             <summary>
                 <code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
             </summary>
-            Variable parameters are indicated by a forward slash folllowed by a colon, such as <code>/:param1</code>. Parameters are added to the request.params object.
+            <div>
+                Variable parameters are indicated by a forward slash folllowed by a colon, such as <code>/:param1</code>. Parameters are added to the request.params object.
+            </div>
         </details>
         <details>
             <summary>
@@ -98,13 +172,17 @@ const app = new App();
                     <summary>
                         <code>request</code> <a href="#class-request">&lt;Request&gt;</a>
                     </summary>
-                    An instance of the class from the App.IncomingMessage.
+                    <div>
+                        An instance of the class from the App.IncomingMessage.
+                    </div>
                 </details>
                 <details>
                     <summary>
                         <code>response</code> <a href="#class-response">&lt;Response&gt;</a>
                     </summary>
-                    An instance of the class from the App.ServerResponse.
+                    <div>
+                        An instance of the class from the App.ServerResponse.
+                    </div>
                 </details>
             </ul>
         </details>
@@ -117,7 +195,9 @@ const app = new App();
                     <summary>
                         <code>record</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
                     </summary>
-                    If set to <code>false</code> it is excluded in the ApiRegister and no record is reported to.
+                    <div>
+                        If set to <code>false</code> it is excluded in the ApiRegister and no record is reported to.
+                    </div>
                 </details>
             </ul>
         </details>
@@ -128,51 +208,52 @@ const app = new App();
 </div>
 
 <div>
-    <h3><code>app.delete(path, callback[, options])</code></h3>
+    <h3><code>app.use(path, callback)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
+            </summary>
+            <div>
+                Variable parameters are indicated by a forward slash folllowed by a colon, such as <code>/:param1</code>. Parameters are added to the request.params object.
+            </div>
+        </details>
+        <details>
+            <summary>
+                <code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+            </summary>
+            <b><code>function callback(request, response, next) {}</code></b>
+            <ul>
+                <details>
+                    <summary>
+                        <code>request</code> <a href="#class-request">&lt;Request&gt;</a> <b>Required!</b>
+                    </summary>
+                    <div>
+                        An instance of the class from the App.IncomingMessage.
+                    </div>
+                </details>
+                <details>
+                    <summary>
+                        <code>response</code> <a href="#class-response">&lt;Response&gt;</a> <b>Required!</b>
+                    </summary>
+                    <div>
+                        An instance of the class from the App.ServerResponse.
+                    </div>
+                </details>
+                <details>
+                    <summary>
+                        <code>next</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a> <b>Required!</b>
+                    </summary>
+                    <div><b><code>function next() {}</code></b></div>
+                    <div>
+                        The argument next is a function and must be invoked in order to reach the endpoint.
+                    </div>
+                </details>
+            </ul>
+        </details>
+    </ul>
     <div>
-        Places the callback as a DELETE method at the specified path.
-    </div>
-</div>
-
-<div>
-    <h3><code>app.get(path, callback[, options])</code></h3>
-    <div>
-        Places the callback as a GET method at the specified path.
-    </div>
-</div>
-
-<div>
-    <h3><code>app.head(path, callback[, options])</code></h3>
-    <div>
-        Places the callback as a HEAD method at the specified path.
-    </div>
-</div>
-
-<div>
-    <h3><code>app.options(path, callback[, options])</code></h3>
-    <div>
-        Places the callback as a OPTIONS method at the specified path.
-    </div>
-</div>
-
-<div>
-    <h3><code>app.patch(path, callback[, options])</code></h3>
-    <div>
-        Places the callback as a PATCH method at the specified path.
-    </div>
-</div>
-
-<div>
-    <h3><code>app.post(path, callback[, options])</code></h3>
-    <div>
-        Places the callback as a POST method at the specified path.
-    </div>
-</div>
-
-<div>
-    <h3><code>app.put(path, callback[, options])</code></h3>
-    <div>
-        Places the callback as a PUT method at the specified path.
+        Inserts middleware functions at the specified path. Requests at the specified path or requests having crossed the specified path are using the middleware. Middleware functions are invoked before the api endpoint is invoked.
     </div>
 </div>
 
@@ -183,19 +264,25 @@ const app = new App();
             <summary>
                 <code>register</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
             </summary>
-            Throws a TypeError when register is not an object.
+            <div>
+                Throws a TypeError when register is not an object.
+            </div>
         </details>
         <details>
             <summary>
                 <code>reset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
             </summary>
-            If reset is <code>true</code> sets every endpoint's counter and bytes property to <code>0</code>.
+            <div>
+                If reset is <code>true</code> sets every endpoint's counter and bytes property to <code>0</code>.
+            </div>
         </details>
         <details>
             <summary>
                 Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
-            Allows chaining methods.
+            <div>
+                Allows chaining methods.
+            </div>
         </details>
     </ul>
     <div>
@@ -210,7 +297,9 @@ const app = new App();
             <summary>
                 Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
             </summary>
-            Allows chaining methods.
+            <div>
+                Allows chaining methods.
+            </div>
         </details>
     </ul>
     <div>
@@ -334,7 +423,9 @@ const app = new App();
             <summary>
                 <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
             </summary>
-            The data object is stringified by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a>.
+            <div>
+                The data object is stringified by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a>.
+            </div>
         </details>
     </ul>
     <div>
@@ -350,10 +441,14 @@ const app = new App();
             <summary>
                 <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">&lt;Buffer&gt;</a>
             </summary>
-            A <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_from_string_encoding">Buffer</a> is created from data if it is a string and it's byte <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> is passed over to the method report.
+            <div>
+                A <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_from_string_encoding">Buffer</a> is created from data if it is a string and it's byte <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> is passed over to the method report.
+            </div>
         </details>
     </ul>
-    Invokes the response's <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> and the report method.
+    <div>
+        Invokes the response's <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> and the report method.
+    </div>
 </div>
 
 <div>
@@ -363,13 +458,17 @@ const app = new App();
             <summary>
                 <code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
             </summary>
-            A byteLength can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
+            <div>
+                A byteLength can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
+            </div>
         </details>
         <details>
             <summary>
                 Returns <code>this</code> <a href="#class-response">&lt;Response&gt;</a>
             </summary>
-            Allows chaining methods.
+            <div>
+                Allows chaining methods.
+            </div>
         </details>
     </ul>
     <div>
@@ -390,7 +489,9 @@ const app = new App();
             <summary>
                 <code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a>
             </summary>
-            This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
+            <div>
+                This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
+            </div>
         </details>
     </ul>
     <div>
@@ -405,13 +506,17 @@ const app = new App();
             <summary>
                 <code>filepath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
             </summary>
-            If a file does not exist at filepath the response's sendError is invoked with status <code>404</code>.
+            <div>
+                If a file does not exist at filepath the response's sendError is invoked with status <code>404</code>.
+            </div>
         </details>
         <details>
             <summary>
                 Returns <code>this</code> <a href="#class-response">&lt;Response&gt;</a>
             </summary>
-            The response is returned to allow chain invoking multiple calls to sendFile.
+            <div>
+                The response is returned to allow chain invoking multiple calls to sendFile.
+            </div>
         </details>
     </ul>
     <div>
@@ -450,26 +555,34 @@ const app = new App();
             <summary>
                 <code>mimetype</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
             </summary>
-            A requestBodyParser is accessed by using the mimetype as locator.
+            <div>
+                A requestBodyParser is accessed by using the mimetype as locator.
+            </div>
         </details>
         <details>
             <summary>
                 <code>parse</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
             </summary>
             <div><b><code>function parse(body) {}</code></b></div>
-            This requestBodyParser uses this parse function in order to parse data from incomming requests and put the parsed data in request.body. These parse functions wrapped in a try catch.
+            <div>
+                This requestBodyParser uses this parse function in order to parse data from incomming requests and put the parsed data in request.body. These parse functions wrapped in a try catch.
+            </div>
         </details>
         <details>
             <summary>
                 <code>errorMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a> Optional
             </summary>
-            In case the parse function got an error when parsing this errorMessage is send to the response with the method request.sendError, otherwise the error that was catched by the parser itself is send.
+            <div>
+                In case the parse function got an error when parsing this errorMessage is send to the response with the method request.sendError, otherwise the error that was catched by the parser itself is send.
+            </div>
         </details>
         <details>
             <summary>
                 Returns <code>this</code> <a href="#class-requestbodyparsers">&lt;RequestBodyParsers&gt;</a>
             </summary>
-            Allows chaining methods.
+            <div>
+                Allows chaining methods.
+            </div>
         </details>
     </ul>
     <div>
