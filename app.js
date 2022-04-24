@@ -12,13 +12,14 @@ module.exports = (protocol, options) => {
     var http = require("http");
     protocol === "https" ? http = require("https") : protocol = "http";
     const logger = options?.logger === false ? null : new Logger();
-    const routes = new Routes();
-    const context = { logger, routes };
-    const Request = RequestFactory(context);
-    const Response = ResponseFactory(context);
+    const emper = { logger };
+    const routes = new Routes(emper);
+    emper.routes = routes;
+    const Request = RequestFactory(emper);
+    const Response = ResponseFactory(emper);
     let EmperRequest = Request;
     let EmperResponse = Response;
-    const SocketModule = SocketFactory(context);
+    const SocketModule = SocketFactory();
     const listeningListener = SocketModule.listeningListener();
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
@@ -33,45 +34,49 @@ module.exports = (protocol, options) => {
                 throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;
-            super(options, context.requestListener);
+            super(options, emper.requestListener);
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
             this.once("listening", listeningListener);
         }
-        listen(options = {}, listeningListener = () => console.log(`Listening on: ${this.url}`)) {
+        listen(options = {}, listeningListener) {
             return super.listen({
                 port: options?.port || protocol === "https" ? 8081 : 8080,
                 host: options?.hostname || options?.host || "127.0.0.1",
                 backlog: options?.backlog || null
-            }, listeningListener);
+            }, listeningListener || (() => console.log(`Listening on: ${this.url}`)));
         }
         delete(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "DELETE", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "DELETE");
+            routes.adaddEndpointd(path, "DELETE", callback).record = options?.record === false ? null : apiRegister.register(path, "DELETE");
         }
         get(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "GET", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "GET");
+            routes.addEndpoint(path, "GET", callback).record = options?.record === false ? null : apiRegister.register(path, "GET");
         }
         head(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "HEAD", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "HEAD");
+            routes.addEndpoint(path, "HEAD", callback).record = options?.record === false ? null : apiRegister.register(path, "HEAD");
         }
         options(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "OPTIONS", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "OPTIONS");
+            routes.addEndpoint(path, "OPTIONS", callback).record = options?.record === false ? null : apiRegister.register(path, "OPTIONS");
         }
         patch(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "PATCH", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "PATCH");
+            routes.addEndpoint(path, "PATCH", callback).record = options?.record === false ? null : apiRegister.register(path, "PATCH");
         }
         post(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "POST", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "POST");
+            routes.addEndpoint(path, "POST", callback).record = options?.record === false ? null : apiRegister.register(path, "POST");
         }
         put(path, callback, options) {
             if (typeof callback !== "function") throw new TypeError("Callback must be a function");
-            routes.add(path, "PUT", callback).apiRecord = options?.record === false ? null : apiRegister.register(path, "PUT");
+            routes.addEndpoint(path, "PUT", callback).record = options?.record === false ? null : apiRegister.register(path, "PUT");
+        }
+        use(path, callback) {
+            if (typeof callback !== "function") throw new TypeError("Callback must be a function");
+            routes.addMiddleware(path, callback);
         }
         loadApiRegister(register, reset) {
             const objToStr = Object.prototype.toString;
@@ -97,7 +102,7 @@ module.exports = (protocol, options) => {
             for (const path in apis) {
                 const api = apis[path];
                 for (const method in api)
-                    if (!(routes.has(path, method)?.apiRecord))
+                    if (!(routes.hasEndpoint(path, method)?.record))
                         delete (api[method]);
                 if (Object.keys(api).length === 0)
                     delete (apis[path]);

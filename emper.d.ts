@@ -11,6 +11,7 @@ export class App extends Server {
     patch(path: string, callback: requestCallback, options: requestOptions): void
     post(path: string, callback: requestCallback, options: requestOptions): void
     put(path: string, callback: requestCallback, options: requestOptions): void
+    use(path: string, callback: middlewareCallback): void
     /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
     loadApiRegister(register: { [path: string]: { [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: { bytes: number, counter: number } } }, reset: boolean): App
     /**Destroys any ApiRecord that does not exist in a route*/
@@ -37,6 +38,7 @@ export class App extends Server {
 }
 type AppFactory = (protocol: string, options: {}) => typeof App
 type requestCallback = (request: Request, response: Response) => void
+type middlewareCallback = (request: Request, response: Response, next: () => void) => void
 type requestOptions = { record: false }
 class Request extends IncomingMessage {
     socket: Socket
