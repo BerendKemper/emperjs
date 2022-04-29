@@ -12,9 +12,8 @@ module.exports = (protocol, options) => {
     var http = require("http");
     protocol === "https" ? http = require("https") : protocol = "http";
     const logger = options?.logger === false ? null : new Logger();
-    const emper = { logger };
-    const routes = new Routes(emper);
-    emper.routes = routes;
+    const routes = new Routes();
+    const emper = { logger, routes };
     const Request = RequestFactory(emper);
     const Response = ResponseFactory(emper);
     let EmperRequest = Request;

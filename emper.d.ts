@@ -3,9 +3,9 @@ import * as net from "net"
 import * as tls from "tls"
 declare type AppFactory = (protocol: string, options: AppOptions) => typeof App
 interface AppOptions {
-    logger?: false | undefined;
+    logger?: false | undefined
 }
-type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT };
+type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
 declare class App extends Server {
     constructor(options: ServerOptions)
     listen(options: ListenOptions, listeningListener: () => void): App
@@ -20,8 +20,8 @@ declare class App extends Server {
     /**Loads an external register, copies the previous register's records to the external register and overwrites each record's values. Sets values to 0 if reset was true.*/
     loadApiRegister(register: {
         [path: string]: {
-            [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: Record;
-        };
+            [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: Record
+        }
     }, reset: boolean): App
     /**Destroys any ApiRecord that does not exist in a route*/
     destroyUnusedRecords(): App
@@ -29,8 +29,8 @@ declare class App extends Server {
     get url(): string
     get apis(): {
         [path: string]: {
-            [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: ApiRecord;
-        };
+            [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]: ApiRecord
+        }
     }
     static get IncomingMessage(): typeof Request
     /**Set this value to null in order to reset it to the base Request class.*/
@@ -53,7 +53,7 @@ declare class App extends Server {
         [ext: string]: string
     })
 }
-type ServerOptions = EmperServerOptions & tls.SecureContextOptions & tls.TlsOptions;
+type ServerOptions = EmperServerOptions & tls.SecureContextOptions & tls.TlsOptions
 interface EmperServerOptions {
     /**
      * Optionally overrides the value of
@@ -61,34 +61,34 @@ interface EmperServerOptions {
      * the maximum length of request headers in bytes.
      * @default 8192
      */
-    maxHeaderSize?: number | undefined;
+    maxHeaderSize?: number | undefined
     /**
      * Use an insecure HTTP parser that accepts invalid HTTP headers when true.
      * Using the insecure parser should be avoided.
      * See --insecure-http-parser for more information.
      * @default false
      */
-    insecureHTTPParser?: boolean | undefined;
+    insecureHTTPParser?: boolean | undefined
 }
 interface ListenOptions {
-    port?: number | undefined;
-    host?: string | undefined;
-    backlog?: number | undefined;
+    port?: number | undefined
+    host?: string | undefined
+    backlog?: number | undefined
 }
 declare type requestCallback = (request: Request, response: Response) => void
 declare type middlewareCallback = (request: Request, response: Response, next: () => void) => void
 interface RequestOptions {
     /** When false disables recording the API and it will not be registered in the ApiRegister. */
-    record?: false | undefined;
+    record?: false | undefined
 }
 interface Record {
-    bytes: number;
-    counter: number;
+    bytes: number
+    counter: number
 }
 interface logger {
-    error: log;
-    log: log;
-    debug: log;
+    error: log
+    log: log
+    debug: log
 }
 type log = (...data) => any
 declare class Socket extends net.Socket {
