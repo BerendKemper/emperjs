@@ -29,11 +29,12 @@ module.exports = (protocol, options) => {
         constructor(options = {}) {
             if (app === (app = true))
                 throw new Error("An App can only create one instance");
-            if (Object.prototype.toString.call(options) !== "[object Object]")
+            if (options === null || typeof options !== "object")
                 throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;
             super(options, emper.requestListener);
+            emper.requestListener = null;
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
             this.once("listening", listeningListener);
@@ -79,13 +80,13 @@ module.exports = (protocol, options) => {
         }
         loadApiRegister(register, reset) {
             const objToStr = Object.prototype.toString;
-            if (objToStr.call(register) !== "[object Object]")
+            if (register === null || typeof register !== "object")
                 throw new TypeError("param must be an object");
             const apis = apiRegister.apis;
             const recordCall = reset === true ? "reset" : "from";
             for (const path in apis) {
                 const api = apis[path];
-                const loadingApi = objToStr.call(register[path]) === "[object Object]"
+                const loadingApi = register[path] === null || typeof register[path] !== "object"
                     ? register[path]
                     : {};
                 register[path] = api;
@@ -154,7 +155,8 @@ module.exports = (protocol, options) => {
             return _mimetypes;
         }
         static set mimetypes(mimetypes) {
-            if (Object.prototype.toString.call(mimetypes) !== "[object Object]") throw new TypeError("param must be an object");
+            if (mimetypes === null || typeof mimetypes !== "object")
+                throw new TypeError("param must be an object");
             for (const type in mimetypes)
                 _mimetypes[type] = mimetypes[type];
         }
