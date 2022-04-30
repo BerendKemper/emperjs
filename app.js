@@ -19,8 +19,6 @@ module.exports = (protocol, options) => {
     let EmperRequest = Request;
     let EmperResponse = Response;
     const SocketModule = SocketFactory(emper);
-    const listeningListener = emper.listeningListener;
-    emper.listeningListener = null;
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
@@ -38,7 +36,8 @@ module.exports = (protocol, options) => {
             emper.requestListener = null;
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
-            this.once("listening", listeningListener);
+            this.once("listening", emper.listeningListener);
+            emper.listeningListener = null;
         }
         listen(options = {}, listeningListener) {
             return super.listen({
