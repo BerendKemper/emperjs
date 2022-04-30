@@ -36,7 +36,7 @@ module.exports = (protocol, options) => {
             emper.requestListener = null;
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
-            this.once("listening", emper.listeningListener);
+            this.on("listening", emper.listeningListener);
             emper.listeningListener = null;
         }
         listen(options = {}, listeningListener) {
