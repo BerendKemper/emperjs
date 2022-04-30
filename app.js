@@ -18,8 +18,9 @@ module.exports = (protocol, options) => {
     const Response = ResponseFactory(emper);
     let EmperRequest = Request;
     let EmperResponse = Response;
-    const SocketModule = SocketFactory();
-    const listeningListener = SocketModule.listeningListener();
+    const SocketModule = SocketFactory(emper);
+    const listeningListener = emper.listeningListener;
+    emper.listeningListener = null;
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
