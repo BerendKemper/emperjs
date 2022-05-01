@@ -79,14 +79,13 @@ module.exports = (protocol, options) => {
             routes.addMiddleware(path, callback);
         }
         loadApiRegister(register, reset) {
-            const objToStr = Object.prototype.toString;
             if (register === null || typeof register !== "object")
                 throw new TypeError("param must be an object");
             const apis = apiRegister.apis;
             const recordCall = reset === true ? "reset" : "from";
             for (const path in apis) {
                 const api = apis[path];
-                const loadingApi = register[path] === null || typeof register[path] !== "object"
+                const loadingApi = register[path] !== null && typeof register[path] === "object"
                     ? register[path]
                     : {};
                 register[path] = api;
