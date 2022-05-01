@@ -32,7 +32,7 @@ module.exports = (protocol, options) => {
                 throw new TypeError("param must be an object");
             options.IncomingMessage = EmperRequest;
             options.ServerResponse = EmperResponse;
-            super(options, emper.requestListener);
+            emper.server = super(options, emper.requestListener);
             emper.requestListener = null;
             /* this.on("connection", onConnection); */
             /* this.on("error", onError); */
