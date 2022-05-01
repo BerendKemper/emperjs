@@ -18,7 +18,7 @@ module.exports = (protocol, options) => {
     const Response = ResponseFactory(emper);
     let EmperRequest = Request;
     let EmperResponse = Response;
-    const SocketModule = SocketFactory(emper);
+    const Socket = SocketFactory(emper);
     /* function onConnection(socket) { }; */
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
@@ -137,10 +137,10 @@ module.exports = (protocol, options) => {
             EmperResponse = OwnServerResponse;
         }
         static get Socket() {
-            return SocketModule.EmperSocket;
+            return Socket.EmperSocket;
         }
         static set Socket(OwnSocket) {
-            SocketModule.EmperSocket = OwnSocket;
+            Socket.EmperSocket = OwnSocket;
         }
         static get ApiRecord() {
             return ApiRegister.ApiRecord;
