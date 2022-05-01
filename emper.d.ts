@@ -124,16 +124,17 @@ declare class Response extends http.ServerResponse {
     sendJson(status: number, data: object): void
     send(data: Buffer): void
     send(data: string): void
-    report(byteLength: number): Response
     sendError(status: number, error: Error): void
     sendFile(filepath: string): Response
-    get apiRecord(): ApiRecord
+    apiRecord?: ApiRecord
 }
 declare class ApiRecord {
     bytes: number
     counter: number
+    /**Adds the byteLength to the total bytes and increments the counter.*/
+    report(byteLength: number): Response
     /**Copies record's counter and bytes properties, if falsy sets them to 0.*/
     from(record: object): void
-    /**Sets counter and bytes to 0*/
+    /**Sets counter and bytes to 0.*/
     reset(): ApiRecord
 }

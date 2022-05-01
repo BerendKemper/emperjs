@@ -452,31 +452,6 @@ const app = new App();
 </div>
 
 <div>
-    <h3><code>response.report(byteLength)</code></h3>
-    <ul>
-        <details>
-            <summary>
-                <code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
-            </summary>
-            <div>
-                A byteLength can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
-            </div>
-        </details>
-        <details>
-            <summary>
-                Returns <code>this</code> <a href="#class-response">&lt;Response&gt;</a>
-            </summary>
-            <div>
-                Allows chaining methods.
-            </div>
-        </details>
-    </ul>
-    <div>
-        Each endpoint is recorded in an ApiRecord from the App's ApiRegister. Invoking report increments the apiRecord's counter property and adds the byteLength to the apiRecord's bytes property.
-    </div>
-</div>
-
-<div>
     <h3><code>response.sendError(status, error)</code></h3>
     <ul>
         <details>
@@ -594,6 +569,23 @@ const app = new App();
     <h2>Class: <code>ApiRecord</code></h2>
     <div>
         Every HTTP method published is stored in the App's ApiRegister as an ApiRecord. Every apiRecord stores and updates information from the server's endpoints. This class can be read from the static property App.ApiRecord.
+    </div>
+</div>
+
+<div>
+    <h3><code>apiRecord.report(byteLength)</code></h3>
+    <ul>
+        <details>
+            <summary>
+                <code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
+            </summary>
+            <div>
+                A byteLength can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
+            </div>
+        </details>
+    </ul>
+    <div>
+        Each endpoint is recorded in an ApiRecord from the App's ApiRegister. Invoking report increments the apiRecord's counter property and adds the byteLength to the apiRecord's bytes property.
     </div>
 </div>
 
