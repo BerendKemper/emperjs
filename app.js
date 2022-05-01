@@ -19,7 +19,7 @@ module.exports = (protocol, options) => {
     let EmperRequest = Request;
     let EmperResponse = Response;
     const Socket = SocketFactory(emper);
-    /* function onConnection(socket) { }; */
+    // function onConnection(socket) { };
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
     const apiRegister = new ApiRegister();
@@ -34,7 +34,7 @@ module.exports = (protocol, options) => {
             options.ServerResponse = EmperResponse;
             emper.server = super(options, emper.requestListener);
             emper.requestListener = null;
-            /* this.on("connection", onConnection); */
+            // this.on("connection", onConnection);
             /* this.on("error", onError); */
             this.on("listening", emper.listeningListener);
             emper.listeningListener = null;
