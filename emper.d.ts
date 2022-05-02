@@ -6,7 +6,7 @@ interface AppOptions {
     logger?: false | undefined
 }
 type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
-declare class App extends Server {
+declare class App extends http.Server {
     constructor(options: ServerOptions)
     listen(options: ListenOptions, listeningListener: () => void): App
     delete(path: string, callback: requestCallback, options: RequestOptions): void
