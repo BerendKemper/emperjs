@@ -10,7 +10,7 @@ const Routes = require("./lib/routes");
 /**@type {import("emperjs/emper").AppFactory}*/
 module.exports = (protocol, options) => {
     var http = require("http");
-    protocol === "https" ? http = require("https") : protocol = "http";
+    protocol === "https" && (http = require("https"));
     const logger = options?.logger === false ? null : new Logger();
     const routes = new Routes();
     const emper = { logger, routes };

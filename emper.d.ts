@@ -1,11 +1,10 @@
 import * as http from "http"
 import * as net from "net"
 import * as tls from "tls"
-declare type AppFactory = (protocol: string, options: AppOptions) => typeof App
+declare type AppFactory = (protocol: 'http' | "https", options: AppOptions) => typeof App
 interface AppOptions {
     logger?: false | undefined
 }
-type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
 declare class App extends http.Server {
     constructor(options: ServerOptions)
     listen(options: ListenOptions, listeningListener: () => void): App
@@ -77,6 +76,7 @@ interface ListenOptions {
 }
 declare type requestCallback = (request: Request, response: Response) => void
 declare type middlewareCallback = (request: Request, response: Response, next: () => void) => void
+declare type httpMethods = { DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT }
 interface RequestOptions {
     /** When false disables recording the API and it will not be registered in the ApiRegister. */
     record?: false | undefined
