@@ -1,12 +1,8 @@
 # emperjs
-A framework to make a http and https webserver. Has build in an api router and register. <b>This work is still in progress!</b>
-<code>npm i emperjs</code>
+<div>A framework to make a http and https webserver. Has build in an api router and register.</div>
+<div><code>npm i emperjs</code></div>
 
 ```javascript
-const AppFactory = require("emperjs");
-const App = AppFactory("https");
-const app = new App();
-// Or
 const App = require("emperjs")("http");
 const app = new App();
 ```

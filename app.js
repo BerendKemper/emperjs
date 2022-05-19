@@ -7,7 +7,6 @@ const _mimetypes = require("emperjs/lib/fileTypes");
 const httpMethods = require("./lib/httpMethods");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
-/**@type {import("emperjs/emper").AppFactory}*/
 module.exports = (protocol, options) => {
     var http = require("http");
     protocol === "https" && (http = require("https"));
