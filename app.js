@@ -8,8 +8,8 @@ const httpMethods = require("./lib/httpMethods");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
 module.exports = (protocol, options) => {
-    var http = require("http");
-    protocol === "https" && (http = require("https"));
+    var DynamicServer = require("http").Server;
+    protocol === "https" && (DynamicServer = require("https").Server);
     const logger = options?.logger === false ? null : new Logger();
     const routes = new Routes();
     const emper = { logger, routes };
@@ -23,7 +23,7 @@ module.exports = (protocol, options) => {
     const ApiRegister = ApiRegisterFactory();
     const apiRegister = new ApiRegister();
     let app = false;
-    return class App extends http.Server {
+    return class Server extends DynamicServer {
         constructor(options = {}) {
             if (app === (app = true))
                 throw new Error("An App can only create one instance");

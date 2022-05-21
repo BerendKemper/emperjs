@@ -1,15 +1,15 @@
-export = emperjs.createApp;
+export = emperjs.createServer;
 namespace emperjs {
     import * as http from "http";
     import * as net from "net";
     import * as tls from "tls";
-    declare function createApp(protocol: 'http' | "https", options: AppOptions): typeof App;
-    interface AppOptions {
+    declare function createServer(protocol: 'http' | "https", options: Options): typeof Server;
+    interface Options {
         logger?: false | undefined;
     }
-    declare class App extends http.Server {
+    declare class Server extends http.Server {
         constructor(options: ServerOptions);
-        listen(options: ListenOptions, listeningListener: () => void): App;
+        listen(options: ListenOptions, listeningListener: () => void): Server;
         delete(path: string, callback: requestCallback, options: RequestOptions): void;
         get(path: string, callback: requestCallback, options: RequestOptions): void;
         head(path: string, callback: requestCallback, options: RequestOptions): void;
@@ -23,9 +23,9 @@ namespace emperjs {
             [path: string]: {
                 [key in keyof httpMethods /*as `${Uppercase<string & key>}`*/]?: Record;
             };
-        }, reset: boolean): App;
+        }, reset: boolean): Server;
         /**Destroys any ApiRecord that does not exist in a route*/
-        destroyUnusedRecords(): App;
+        destroyUnusedRecords(): Server;
         /**"http(s)://${address}:${port}*/
         get url(): string;
         get apis(): {

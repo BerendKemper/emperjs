@@ -3,18 +3,22 @@
 <div><code>npm i emperjs</code></div>
 
 ```javascript
-const App = require("emperjs")("http");
-const app = new App();
+const createServer = require("emperjs");
+const Server = createServer("https");
+const server = new Server();
+// or
+const Server = require("emperjs")("http");
+const server = new App();
 ```
 <div>
-    <h2>AppFactory(protocol[, options])</h2>
+    <h2>createServer(protocol[, options])</h2>
     <ul>
         <details>
             <summary>
                 <code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
             </summary>
             <div>
-                The protocol is <code>"http"</code> or <code>"https"</code>. The factory created class App extends dynamically from the protocol's Server class.
+                The protocol is <code>"http"</code> or <code>"https"</code>. The factory created class Server extends dynamically from the protocol's Server class.
             </div>
         </details>
         <details>
@@ -34,29 +38,29 @@ const app = new App();
         </details>
         <details>
             <summary>
-                <code>Returns</code> <a href="#class-app">&lt;App&gt;</a>
+                <code>Returns</code> <a href="#class-server">&lt;Server&gt;</a>
             </summary>
             <div>
-                The factory creates a class App.
+                Creates a Server class.
             </div>
         </details>
     </ul>
     <div>
-        Creates a class App. The App is described below.
+        Creates a Server class. The Server is described below.
     </div>
 </div>
 
 <div>
-    <h2>Class: <code>App</code></h2>
+    <h2>Class: <code>Server</code></h2>
     <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_server">http.Server</a> | <a href="https://nodejs.org/dist/latest-v14.x/docs/api/https.html#https_class_https_server">https.Server</a></li></ul>
 </div>
 
 <div>
-    <h3><code>new App()</code></h3>
+    <h3><code>new Server()</code></h3>
 </div>
 
 <div>
-    <h3><code>app.listen(options)</code></h3>
+    <h3><code>server.listen(options)</code></h3>
     <ul>
         <details>
             <summary>
@@ -86,7 +90,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
+                Returns <code>this</code> <a href="#class-server">&lt;Server&gt;</a>
             </summary>
             <div>
                 Allows chaining methods.
@@ -99,49 +103,49 @@ const app = new App();
 </div>
 
 <div>
-    <h3><code>app.delete(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.delete(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a DELETE method at the specified path.
     </div>
 </div>
 
 <div>
-    <h3><code>app.get(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.get(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a GET method at the specified path.
     </div>
 </div>
 
 <div>
-    <h3><code>app.head(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.head(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a HEAD method at the specified path.
     </div>
 </div>
 
 <div>
-    <h3><code>app.options(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.options(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a OPTIONS method at the specified path.
     </div>
 </div>
 
 <div>
-    <h3><code>app.patch(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.patch(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a PATCH method at the specified path.
     </div>
 </div>
 
 <div>
-    <h3><code>app.post(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.post(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a POST method at the specified path.
     </div>
 </div>
 
 <div>
-    <h3><code>app.put(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
+    <h3><code>server.put(path, callback[, options])</code></h3> <a href="#http-methods">&lt;HTTP method&gt;</a>
     <div>
         Places the callback as a PUT method at the specified path.
     </div>
@@ -169,7 +173,7 @@ const app = new App();
                         <code>request</code> <a href="#class-request">&lt;Request&gt;</a>
                     </summary>
                     <div>
-                        An instance of the class from the App.IncomingMessage.
+                        An instance of the class from the Server.IncomingMessage.
                     </div>
                 </details>
                 <details>
@@ -177,7 +181,7 @@ const app = new App();
                         <code>response</code> <a href="#class-response">&lt;Response&gt;</a>
                     </summary>
                     <div>
-                        An instance of the class from the App.ServerResponse.
+                        An instance of the class from the Server.ServerResponse.
                     </div>
                 </details>
             </ul>
@@ -204,7 +208,7 @@ const app = new App();
 </div>
 
 <div>
-    <h3><code>app.use(path, callback)</code></h3>
+    <h3><code>server.use(path, callback)</code></h3>
     <ul>
         <details>
             <summary>
@@ -225,7 +229,7 @@ const app = new App();
                         <code>request</code> <a href="#class-request">&lt;Request&gt;</a> <b>Required!</b>
                     </summary>
                     <div>
-                        An instance of the class from the App.IncomingMessage.
+                        An instance of the class from the Server.IncomingMessage.
                     </div>
                 </details>
                 <details>
@@ -233,7 +237,7 @@ const app = new App();
                         <code>response</code> <a href="#class-response">&lt;Response&gt;</a> <b>Required!</b>
                     </summary>
                     <div>
-                        An instance of the class from the App.ServerResponse.
+                        An instance of the class from the Server.ServerResponse.
                     </div>
                 </details>
                 <details>
@@ -254,7 +258,7 @@ const app = new App();
 </div>
 
 <div>
-    <h3><code>app.loadApiRegister(register, reset)</code></h3>
+    <h3><code>server.loadApiRegister(register, reset)</code></h3>
     <ul>
         <details>
             <summary>
@@ -274,7 +278,7 @@ const app = new App();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
+                Returns <code>this</code> <a href="#class-server">&lt;Server&gt;</a>
             </summary>
             <div>
                 Allows chaining methods.
@@ -282,16 +286,16 @@ const app = new App();
         </details>
     </ul>
     <div>
-        Loads an external object to replace the app's apiRegister.
+        Loads an external object to replace the server's apiRegister.
     </div>
 </div>
 
 <div>
-    <h3><code>app.destroyUnusedRecords()</code></h3>
+    <h3><code>server.destroyUnusedRecords()</code></h3>
     <ul>
         <details>
             <summary>
-                Returns <code>this</code> <a href="#class-app">&lt;App&gt;</a>
+                Returns <code>this</code> <a href="#class-server">&lt;Server&gt;</a>
             </summary>
             <div>
                 Allows chaining methods.
@@ -304,51 +308,51 @@ const app = new App();
 </div>
 
 <div>
-    <h3><code>app.apis</code></h3>
+    <h3><code>server.apis</code></h3>
     <div>
         Readable property of the apiRegister's apis property.
     </div>
 </div>
 
 <div>
-    <h3><code>App.IncomingMessage</code></h3>
+    <h3><code>Server.IncomingMessage</code></h3>
     <div>
         Static readable and writable property of the server's IncomingMessage class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class Request.
     </div>
 </div>
 
 <div>
-    <h3><code>App.ServerResponse</code></h3>
+    <h3><code>Server.ServerResponse</code></h3>
     <div>
         Static readable and writable property of the server's ServerResponse class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class Response.
     </div>
 </div>
 
 <div>
-    <h3><code>App.Socket</code></h3>
+    <h3><code>Server.Socket</code></h3>
     <div>
         Static readable and writable property of the server's Socket class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class Socket.
     </div>
 </div>
 
 <div>
-    <h3><code>App.ApiRecord</code></h3>
+    <h3><code>Server.ApiRecord</code></h3>
     <div>
         Static readable and writable property of the ApiRegister's ApiRecord class. This property can only be set by a class that is extended at least by the base class. If the property is set with the value <code>null</code> it is restored back to the class ApiRecord.
     </div>
 </div>
 
 <div>
-    <h3><code>App.logger</code></h3>
+    <h3><code>Server.logger</code></h3>
     <div>
-        Static readable property of the App's logger instance.
+        Static readable property of the Server's logger instance.
     </div>
 </div>
 
 <div>
-    <h3><code>App.mimetypes</code></h3>
+    <h3><code>Server.mimetypes</code></h3>
     <div>
-        Static readable and writable property of the App's mimetypes. These mimetypes are used at the method response.sendFile to identify a file's extension with the corresponding mimetype.
+        Static readable and writable property of the Server's mimetypes. These mimetypes are used at the method response.sendFile to identify a file's extension with the corresponding mimetype.
     </div>
 </div>
 
@@ -356,7 +360,7 @@ const app = new App();
     <h2>Class: <code>Socket</code></h2>
     <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/net.html#net_class_net_socket">net.Socket</a></li></ul>
     <div>
-        This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class Socket can be read from the static property App.Socket. It can be also be overwritten as long as the value is a class that was extended from Socket.
+        This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class Socket can be read from the static property Server.Socket. It can be also be overwritten as long as the value is a class that was extended from Socket.
     </div>
 </div>
 
@@ -364,7 +368,7 @@ const app = new App();
     <h2>Class: <code>Request</code></h2>
     <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_incomingmessage">http.IncomingMessage</a></li></ul>
     <div>
-        This object is created internally by the server. It is passed as the first parameter to any endpoint's function. It may be used to access response status, headers and data. The class Request can be read from the static property App.IncomingMessage. It can be also be overwritten as long as the value is a class that was extended from Request.
+        This object is created internally by the server. It is passed as the first parameter to any endpoint's function. It may be used to access response status, headers and data. The class Request can be read from the static property Server.IncomingMessage. It can be also be overwritten as long as the value is a class that was extended from Request.
     </div>
 </div>
 
@@ -402,7 +406,7 @@ const app = new App();
         <li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_serverresponse">http.ServerResponse</a></li>
     </ul>
     <div>
-        This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class Response can be read from the static property App.ServerResponse. It can be also be overwritten as long as the value is a class that was extended from Response.
+        This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class Response can be read from the static property Server.ServerResponse. It can be also be overwritten as long as the value is a class that was extended from Response.
     </div>
 </div>
 
@@ -466,7 +470,7 @@ const app = new App();
         </details>
     </ul>
     <div>
-        Uses the App's logger.error method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with status and the headers content-type set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
+        Uses the Server's logger.error method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with status and the headers content-type set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
     </div>
 </div>
 
@@ -491,7 +495,7 @@ const app = new App();
         </details>
     </ul>
     <div>
-        Invoke this method to stream files to the response. The response content-type header are set to the mimetype found from the file that was send, unless the content-type header was already set. If the mimetype was not found within the static property App.mimetypes the response content-type header is set to <code>"text/plain"</code>. In a single response invoking sendFile more than once results in these files to be appended as one file and send in chunks to the response. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to sendFile ends the response.
+        Invoke this method to stream files to the response. The response content-type header are set to the mimetype found from the file that was send, unless the content-type header was already set. If the mimetype was not found within the static property Server.mimetypes the response content-type header is set to <code>"text/plain"</code>. In a single response invoking sendFile more than once results in these files to be appended as one file and send in chunks to the response. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to sendFile ends the response.
     </div>
     <div>
         The method sendFile is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an x number of writable contexts. The second optimization is that a single writable context can attach an x number of responses. As the readable file reads chunks <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all responses that were attached to the writable context. That means that when 10 responses have been attached to a single writable context there will be 9 fewer chunks of 16kb in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
@@ -564,7 +568,7 @@ const app = new App();
 <div>
     <h2>Class: <code>ApiRecord</code></h2>
     <div>
-        Every HTTP method published is stored in the App's ApiRegister as an ApiRecord. Every apiRecord stores and updates information from the server's endpoints. This class can be read from the static property App.ApiRecord.
+        Every HTTP method published is stored in the Server's ApiRegister as an ApiRecord. Every apiRecord stores and updates information from the server's endpoints. This class can be read from the static property Server.ApiRecord.
     </div>
 </div>
 
@@ -581,7 +585,7 @@ const app = new App();
         </details>
     </ul>
     <div>
-        Each endpoint is recorded in an ApiRecord from the App's ApiRegister. Invoking report increments the apiRecord's counter property and adds the byteLength to the apiRecord's bytes property.
+        Each endpoint is recorded in an ApiRecord from the Server's ApiRegister. Invoking report increments the apiRecord's counter property and adds the byteLength to the apiRecord's bytes property.
     </div>
 </div>
 
@@ -609,7 +613,7 @@ const app = new App();
 <div>
     <h2>Class: <code>Logger</code></h2>
     <div>
-        An instance from this class is exported and required throughout the App's library. The instance can be read from the static property App.logger.
+        An instance from this class is exported and required throughout the Server's library. The instance can be read from the static property Server.logger.
     </div>
 </div>
 
