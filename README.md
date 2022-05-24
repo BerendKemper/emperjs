@@ -8,7 +8,7 @@ const Server = createServer("https");
 const server = new Server();
 // or
 const Server = require("emperjs")("http");
-const server = new App();
+const server = new Server();
 ```
 <div>
     <h2>createServer(protocol[, options])</h2>
