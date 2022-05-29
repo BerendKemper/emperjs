@@ -5,6 +5,7 @@ const SocketFactory = require("./lib/socket");
 const ApiRegisterFactory = require("./lib/apiRegister");
 const _mimetypes = require("emperjs/lib/fileTypes");
 const httpMethods = require("./lib/httpMethods");
+const websocketFactory = require("./lib/websocket");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
 module.exports = (protocol, options) => {
@@ -22,6 +23,7 @@ module.exports = (protocol, options) => {
     /* function onError(error) { }; */
     const ApiRegister = ApiRegisterFactory();
     const apiRegister = new ApiRegister();
+    const upgradeListener = websocketFactory(emper);
     let app = false;
     return class Server extends DynamicServer {
         constructor(options = {}) {
@@ -36,6 +38,7 @@ module.exports = (protocol, options) => {
             // this.on("connection", onConnection);
             /* this.on("error", onError); */
             this.on("listening", emper.listeningListener);
+            this.on("upgrade", upgradeListener);
             emper.listeningListener = null;
         }
         listen(options = {}, listeningListener) {
