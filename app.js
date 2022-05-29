@@ -135,10 +135,14 @@ module.exports = (protocol, options) => {
             EmperResponse = OwnServerResponse;
         }
         static get Socket() {
-            return Socket.EmperSocket;
+            return emper.Socket;
         }
         static set Socket(OwnSocket) {
-            Socket.EmperSocket = OwnSocket;
+            if (OwnSocket === null)
+                return emper.Socket = Socket;
+            else if (!Object.create(OwnSocket.prototype) instanceof Socket)
+                throw TypeError(`The parameter IncomingMessage is not derived from Request`);
+            emper.Socket = OwnSocket;
         }
         static get ApiRecord() {
             return ApiRegister.ApiRecord;
