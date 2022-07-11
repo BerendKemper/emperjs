@@ -40,8 +40,8 @@ module.exports = (protocol, options) => {
         }
         listen(options = {}, listeningListener) {
             return super.listen({
-                port: options?.port || protocol === "https" ? 8081 : 8080,
-                host: options?.hostname || options?.host || "127.0.0.1",
+                port: options?.port || (protocol === "https" ? 8081 : 8080),
+                host: options?.hostname || (options?.host || "127.0.0.1"),
                 backlog: options?.backlog || null
             }, listeningListener || (() => console.log(`Listening on: ${this.url}`)));
         }
