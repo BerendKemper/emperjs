@@ -4,7 +4,6 @@ const ResponseFactory = require("./lib/response");
 const SocketFactory = require("./lib/socket");
 const ApiRegisterFactory = require("./lib/apiRegister");
 const _mimetypes = require("emperjs/lib/fileTypes");
-const httpMethods = require("./lib/httpMethods");
 const Logger = require("./lib/logger");
 const Routes = require("./lib/routes");
 module.exports = (protocol, options) => {
@@ -80,30 +79,19 @@ module.exports = (protocol, options) => {
         loadApiRegister(register, reset) {
             if (register === null || typeof register !== "object")
                 throw new TypeError("param must be an object");
-            const apis = apiRegister.apis;
-            const recordCall = reset === true ? "reset" : "from";
-            for (const path in apis) {
-                const api = apis[path];
-                const loadingApi = register[path] !== null && typeof register[path] === "object"
-                    ? register[path]
-                    : {};
-                register[path] = api;
-                for (const method in api)
-                    if (httpMethods.has(method))
-                        api[method][recordCall](loadingApi[method]);
-            }
-            apiRegister.load(register);
+            apiRegister.load(register, reset === true ? "reset" : "from");
             return this;
         }
         destroyUnusedRecords() {
             const apis = apiRegister.apis;
+            nextApi:
             for (const path in apis) {
                 const api = apis[path];
                 for (const method in api)
                     if (!(routes.hasEndpoint(path, method)?.record))
                         delete (api[method]);
-                if (Object.keys(api).length === 0)
-                    delete (apis[path]);
+                for (const key in api) continue nextApi;
+                delete (apis[path]);
             }
             return this;
         }
