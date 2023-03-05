@@ -15,7 +15,7 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>protocol</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
+                <code>protocol</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"http"</code>
             </summary>
             <div>
                 The protocol is <code>"http"</code> or <code>"https"</code>. The factory created class Server extends dynamically from the protocol's Server class.
@@ -23,12 +23,12 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
+                <code>options</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
             </summary>
             <ul>
                 <details>
                     <summary>
-                        <code>logger</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+                        <code>logger</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
                     </summary>
                     <div>
                         If <code>false</code> the server does not log when the request starts and when the response ends.
@@ -53,7 +53,7 @@ const server = new Server();
 <div>
     <h2>Class: <code>Server</code></h2>
 
-    <ul><li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserver">http.Server</a> | <a href="https://nodejs.org/dist/latest/docs/api/https.html#class-httpsserver">https.Server</a></li></ul>
+    <ul><li>Extends: <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserver">http.Server</a> | <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/https.html#class-httpsserver">https.Server</a></li></ul>
 </div>
 
 <div>
@@ -65,22 +65,22 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+                <code>options</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
             </summary>
             <ul>
                 <details>
                     <summary>
-                        <code>port</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a> Default: <code>8080</code>
+                        <code>port</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a> Default: <code>8080</code>
                     </summary>
                 </details>
                 <details>
                     <summary>
-                        <code>hostname</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"127.0.0.1"</code>
+                        <code>hostname</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a> Default: <code>"127.0.0.1"</code>
                     </summary>
                 </details>
                 <details>
                     <summary>
-                        <code>listeningListener</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+                        <code>listeningListener</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
                     </summary>
                     <div><b><code>function listeningListener() {}</code></b></div>
                     <div>
@@ -157,7 +157,7 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
+                <code>path</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
             </summary>
             <div>
                 Variable parameters are indicated by a forward slash folllowed by a colon, such as <code>/:param1</code>. Parameters are added to the request.params object.
@@ -165,7 +165,7 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+                <code>callback</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
             </summary>
             <b><code>function callback(request, response) {}</code></b>
             <ul>
@@ -189,12 +189,12 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>options</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
+                <code>options</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a> optional
             </summary>
             <ul>
                 <details>
                     <summary>
-                        <code>record</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+                        <code>record</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
                     </summary>
                     <div>
                         If set to <code>false</code> it is excluded in the ApiRegister and no record is reported to.
@@ -213,7 +213,7 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>path</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
+                <code>path</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;string&gt;</a>
             </summary>
             <div>
                 Variable parameters are indicated by a forward slash folllowed by a colon, such as <code>/:param1</code>. Parameters are added to the request.params object.
@@ -221,7 +221,7 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>callback</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+                <code>callback</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
             </summary>
             <b><code>function callback(request, response, next) {}</code></b>
             <ul>
@@ -243,7 +243,7 @@ const server = new Server();
                 </details>
                 <details>
                     <summary>
-                        <code>next</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a> <b>Required!</b>
+                        <code>next</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a> <b>Required!</b>
                     </summary>
                     <div><b><code>function next() {}</code></b></div>
                     <div>
@@ -263,7 +263,7 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>register</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+                <code>register</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
             </summary>
             <div>
                 Throws a TypeError when register is not an object.
@@ -271,7 +271,7 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>reset</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
+                <code>reset</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type">&lt;Boolean&gt;</a>
             </summary>
             <div>
                 If reset is <code>true</code> sets every endpoint's counter and bytes property to <code>0</code>.
@@ -359,7 +359,7 @@ const server = new Server();
 
 <div>
     <h2>Class: <code>Socket</code></h2>
-    <ul><li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/net.html#class-netsocket">net.Socket</a></li></ul>
+    <ul><li>Extends: <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/net.html#class-netsocket">net.Socket</a></li></ul>
     <div>
         This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class Socket can be read from the static property Server.Socket. It can be also be overwritten as long as the value is a class that was extended from Socket.
     </div>
@@ -367,7 +367,7 @@ const server = new Server();
 
 <div>
     <h2>Class: <code>Request</code></h2>
-    <ul><li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpincomingmessage">http.IncomingMessage</a></li></ul>
+    <ul><li>Extends: <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpincomingmessage">http.IncomingMessage</a></li></ul>
     <div>
         This object is created internally by the server. It is passed as the first parameter to any endpoint's function. It may be used to access response status, headers and data. The class Request can be read from the static property Server.IncomingMessage. It can be also be overwritten as long as the value is a class that was extended from Request.
     </div>
@@ -390,7 +390,7 @@ const server = new Server();
 <div>
     <h3><code>request.urlSearchParams</code></h3>
     <div>
-        Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a href="https://nodejs.org/dist/latest/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of <code>"/path/to/api?param1=aapje&amp;param2=01234&amp;param2=56789"</code> then the request.urlSearchParams.<a href="https://nodejs.org/dist/latest/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return <code>["01234", "56789"]</code>.
+        Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of <code>"/path/to/api?param1=aapje&amp;param2=01234&amp;param2=56789"</code> then the request.urlSearchParams.<a target="_blank" href="https://nodejs.org/dist/latest/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return <code>["01234", "56789"]</code>.
     </div>
 </div>
 
@@ -404,7 +404,7 @@ const server = new Server();
 <div>
     <h2>Class: <code>Response</code></h2>
     <ul>
-        <li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserverresponse">http.ServerResponse</a></li>
+        <li>Extends: <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserverresponse">http.ServerResponse</a></li>
     </ul>
     <div>
         This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class Response can be read from the static property Server.ServerResponse. It can be also be overwritten as long as the value is a class that was extended from Response.
@@ -416,21 +416,21 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>status</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
+                <code>status</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
             </summary>
-            <a href ="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP response status codes</a>
+            <a target="_blank" href ="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP response status codes</a>
         </details>
         <details>
             <summary>
-                <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
+                <code>data</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">&lt;Object&gt;</a>
             </summary>
             <div>
-                The data object is stringified by <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a>.
+                The data object is stringified by <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify">JSON.stringify</a>.
             </div>
         </details>
     </ul>
     <div>
-        Sends a json object back to the response. This method invokes <a href="https://nodejs.org/dist/latest/docs/api/http.html#responsewriteheadstatuscode-statusmessage-headers">writeHead</a> with status set to <code>200</code> and the headers content-type set to <code>"application/json"</code> and invokes the send method.
+        Sends a json object back to the response. This method invokes <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#responsewriteheadstatuscode-statusmessage-headers">writeHead</a> with status set to <code>200</code> and the headers content-type set to <code>"application/json"</code> and invokes the send method.
     </div>
 </div>
 
@@ -440,15 +440,15 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a>
+                <code>data</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a>
             </summary>
             <div>
-                A <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#static-method-bufferfromstring-encoding">Buffer</a> is created from data if it is a string and it's byte <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#buflength">length</a> is passed over to the method report.
+                A <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#static-method-bufferfromstring-encoding">Buffer</a> is created from data if it is a string and it's byte <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#buflength">length</a> is passed over to the method report.
             </div>
         </details>
     </ul>
     <div>
-        Invokes the response's <a href="https://nodejs.org/dist/latest/docs/api/http.html#responseenddata-encoding-callback">end</a> and the report method.
+        Invokes the response's <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#responseenddata-encoding-callback">end</a> and the report method.
     </div>
 </div>
 
@@ -457,21 +457,21 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>status</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
+                <code>status</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
             </summary>
-            <a href ="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP response status codes</a>
+            <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">HTTP response status codes</a>
         </details>
         <details>
             <summary>
-                <code>error</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a>
+                <code>error</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a>
             </summary>
             <div>
-                This must be an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a> because the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
+                This must be an <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">&lt;Error&gt;</a> because the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a> and <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a> properties from this object are read.
             </div>
         </details>
     </ul>
     <div>
-        Uses the Server's logger.error method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest/docs/api/http.html#responsewriteheadstatuscode-statusmessage-headers">writeHead</a> with status and the headers content-type set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest/docs/api/http.html#responseenddata-encoding-callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
+        Uses the Server's logger.error method to log the <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#responsewriteheadstatuscode-statusmessage-headers">writeHead</a> with status and the headers content-type set to <code>"text/plain"</code> and invokes the <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#responseenddata-encoding-callback">end</a> method with an <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
     </div>
 </div>
 
@@ -480,7 +480,7 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>filepath</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
+                <code>filepath</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
             </summary>
             <div>
                 If a file does not exist at filepath the response's sendError is invoked with status <code>404</code>.
@@ -496,10 +496,10 @@ const server = new Server();
         </details>
     </ul>
     <div>
-        Invoke this method to stream files to the response. The response content-type header are set to the mimetype found from the file that was send, unless the content-type header was already set. If the mimetype was not found within the static property Server.mimetypes the response content-type header is set to <code>"text/plain"</code>. In a single response invoking sendFile more than once results in these files to be appended as one file and send in chunks to the response. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to sendFile ends the response.
+        Invoke this method to stream files to the response. The response content-type header are set to the mimetype found from the file that was send, unless the content-type header was already set. If the mimetype was not found within the static property Server.mimetypes the response content-type header is set to <code>"text/plain"</code>. In a single response invoking sendFile more than once results in these files to be appended as one file and send in chunks to the response. This is not the same as creating templates of files but it can provide similair results. A <a target="_blank" href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to sendFile ends the response.
     </div>
     <div>
-        The method sendFile is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an x number of writable contexts. The second optimization is that a single writable context can attach an x number of responses. As the readable file reads chunks <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all responses that were attached to the writable context. That means that when 10 responses have been attached to a single writable context there will be 9 fewer chunks of 16kb in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
+        The method sendFile is build to reduce the amount of memory allocated for storing <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an x number of writable contexts. The second optimization is that a single writable context can attach an x number of responses. As the readable file reads chunks <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all responses that were attached to the writable context. That means that when 10 responses have been attached to a single writable context there will be 9 fewer chunks of 16kb in memory. The life cycle of reading a file is <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
     </div>
 </div>
 
@@ -529,7 +529,7 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>mimetype</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
+                <code>mimetype</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>
             </summary>
             <div>
                 A requestBodyParser is accessed by using the mimetype as locator.
@@ -537,7 +537,7 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>parse</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
+                <code>parse</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">&lt;Function&gt;</a>
             </summary>
             <div><b><code>function parse(body) {}</code></b></div>
             <div>
@@ -546,7 +546,7 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                <code>errorMessage</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a> Optional
+                <code>errorMessage</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a> Optional
             </summary>
             <div>
                 In case the parse function got an error when parsing this errorMessage is send to the response with the method request.sendError, otherwise the error that was catched by the parser itself is send.
@@ -554,7 +554,7 @@ const server = new Server();
         </details>
         <details>
             <summary>
-                Returns <code>this</code> <a href="#class-requestbodyparsers">&lt;RequestBodyParsers&gt;</a>
+                Returns <code>this</code> <a target="_blank" href="#class-requestbodyparsers">&lt;RequestBodyParsers&gt;</a>
             </summary>
             <div>
                 Allows chaining methods.
@@ -562,7 +562,7 @@ const server = new Server();
         </details>
     </ul>
     <div>
-        Use this method to add a new requestBodyParser. By default requestBodyParsers exist for content-type <code>"application/json"</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for content-type <code>"application/x-www-form-urlencoded"</code> that parses with <a href="https://nodejs.org/dist/latest/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>.
+        Use this method to add a new requestBodyParser. By default requestBodyParsers exist for content-type <code>"application/json"</code> that parses with <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for content-type <code>"application/x-www-form-urlencoded"</code> that parses with <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>.
     </div>
 </div>
 
@@ -578,10 +578,10 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
+                <code>byteLength</code> <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
             </summary>
             <div>
-                A byteLength can be read from the <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#buflength">length</a> property of a <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#static-method-bufferbytelengthstring-encoding">Buffer.byteLength<a>.
+                A byteLength can be read from the <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#buflength">length</a> property of a <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">Buffer</a> or can be returned from the static method <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/buffer.html#static-method-bufferbytelengthstring-encoding">Buffer.byteLength<a>.
             </div>
         </details>
     </ul>
