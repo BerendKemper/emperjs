@@ -52,7 +52,8 @@ const server = new Server();
 
 <div>
     <h2>Class: <code>Server</code></h2>
-    <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_server">http.Server</a> | <a href="https://nodejs.org/dist/latest-v14.x/docs/api/https.html#https_class_https_server">https.Server</a></li></ul>
+
+    <ul><li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserver">http.Server</a> | <a href="https://nodejs.org/dist/latest/docs/api/https.html#class-httpsserver">https.Server</a></li></ul>
 </div>
 
 <div>
@@ -358,7 +359,7 @@ const server = new Server();
 
 <div>
     <h2>Class: <code>Socket</code></h2>
-    <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/net.html#net_class_net_socket">net.Socket</a></li></ul>
+    <ul><li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/net.html#class-netsocket">net.Socket</a></li></ul>
     <div>
         This object is created internally by the server in the earliest stage of an incomming request right before the server's connection event is fired. The class Socket can be read from the static property Server.Socket. It can be also be overwritten as long as the value is a class that was extended from Socket.
     </div>
@@ -366,7 +367,7 @@ const server = new Server();
 
 <div>
     <h2>Class: <code>Request</code></h2>
-    <ul><li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_incomingmessage">http.IncomingMessage</a></li></ul>
+    <ul><li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpincomingmessage">http.IncomingMessage</a></li></ul>
     <div>
         This object is created internally by the server. It is passed as the first parameter to any endpoint's function. It may be used to access response status, headers and data. The class Request can be read from the static property Server.IncomingMessage. It can be also be overwritten as long as the value is a class that was extended from Request.
     </div>
@@ -389,7 +390,7 @@ const server = new Server();
 <div>
     <h3><code>request.urlSearchParams</code></h3>
     <div>
-        Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of <code>"/path/to/api?param1=aapje&amp;param2=01234&amp;param2=56789"</code> then the request.urlSearchParams.<a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return <code>["01234", "56789"]</code>.
+        Property where the request's search parameters are placed in. The url search parameters are parsed by Node JS's build-in class <a href="https://nodejs.org/dist/latest/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>. When the request has a path of <code>"/path/to/api?param1=aapje&amp;param2=01234&amp;param2=56789"</code> then the request.urlSearchParams.<a href="https://nodejs.org/dist/latest/docs/api/url.html#urlsearchparamsgetallname">getAll</a>("param2") would return <code>["01234", "56789"]</code>.
     </div>
 </div>
 
@@ -403,7 +404,7 @@ const server = new Server();
 <div>
     <h2>Class: <code>Response</code></h2>
     <ul>
-        <li>Extends: <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_class_http_serverresponse">http.ServerResponse</a></li>
+        <li>Extends: <a href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserverresponse">http.ServerResponse</a></li>
     </ul>
     <div>
         This object is created internally by the server. It is passed as the second parameter to an endpoint's function. The class Response can be read from the static property Server.ServerResponse. It can be also be overwritten as long as the value is a class that was extended from Response.
@@ -429,7 +430,7 @@ const server = new Server();
         </details>
     </ul>
     <div>
-        Sends a json object back to the response. This method invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with status set to <code>200</code> and the headers content-type set to <code>"application/json"</code> and invokes the send method.
+        Sends a json object back to the response. This method invokes <a href="https://nodejs.org/dist/latest/docs/api/http.html#responsewriteheadstatuscode-statusmessage-headers">writeHead</a> with status set to <code>200</code> and the headers content-type set to <code>"application/json"</code> and invokes the send method.
     </div>
 </div>
 
@@ -439,15 +440,15 @@ const server = new Server();
     <ul>
         <details>
             <summary>
-                <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">&lt;Buffer&gt;</a>
+                <code>data</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#String_type">&lt;String&gt;</a>|<a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a>
             </summary>
             <div>
-                A <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_from_string_encoding">Buffer</a> is created from data if it is a string and it's byte <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> is passed over to the method report.
+                A <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#static-method-bufferfromstring-encoding">Buffer</a> is created from data if it is a string and it's byte <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#buflength">length</a> is passed over to the method report.
             </div>
         </details>
     </ul>
     <div>
-        Invokes the response's <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> and the report method.
+        Invokes the response's <a href="https://nodejs.org/dist/latest/docs/api/http.html#responseenddata-encoding-callback">end</a> and the report method.
     </div>
 </div>
 
@@ -470,7 +471,7 @@ const server = new Server();
         </details>
     </ul>
     <div>
-        Uses the Server's logger.error method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_writehead_statuscode_statusmessage_headers">writeHead</a> with status and the headers content-type set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/http.html#http_response_end_data_encoding_callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
+        Uses the Server's logger.error method to log the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/Stack">error.stack</a>, invokes <a href="https://nodejs.org/dist/latest/docs/api/http.html#responsewriteheadstatuscode-statusmessage-headers">writeHead</a> with status and the headers content-type set to <code>"text/plain"</code> and invokes the <a href="https://nodejs.org/dist/latest/docs/api/http.html#responseenddata-encoding-callback">end</a> method with an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message">error.message</a>.
     </div>
 </div>
 
@@ -498,7 +499,7 @@ const server = new Server();
         Invoke this method to stream files to the response. The response content-type header are set to the mimetype found from the file that was send, unless the content-type header was already set. If the mimetype was not found within the static property Server.mimetypes the response content-type header is set to <code>"text/plain"</code>. In a single response invoking sendFile more than once results in these files to be appended as one file and send in chunks to the response. This is not the same as creating templates of files but it can provide similair results. A <a href="https://www.npmjs.com/package/ca11back-queue">CallbackQueue</a> ensures that the files are send sequentially. The last call that is not followed by another call to sendFile ends the response.
     </div>
     <div>
-        The method sendFile is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an x number of writable contexts. The second optimization is that a single writable context can attach an x number of responses. As the readable file reads chunks <a href="https://nodejs.org/dist/latest-v16.x/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all responses that were attached to the writable context. That means that when 10 responses have been attached to a single writable context there will be 9 fewer chunks of 16kb in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest-v16.x/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
+        The method sendFile is build to reduce the amount of memory allocated for storing <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">Buffer</a>'s while streaming. The first optimization is that a single readable file can attach an x number of writable contexts. The second optimization is that a single writable context can attach an x number of responses. As the readable file reads chunks <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">&lt;Buffer&gt;</a> from a file, those chunks are send to all responses that were attached to the writable context. That means that when 10 responses have been attached to a single writable context there will be 9 fewer chunks of 16kb in memory. The life cycle of reading a file is <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsopenpath-flags-mode-callback">open</a> > <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsstatpath-options-callback">stat</a> > <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsreadfd-buffer-offset-length-position-callback">read</a> > <a href="https://nodejs.org/dist/latest/docs/api/fs.html#fsclosefd-callback">close</a>. Getting the stat from a file is only used to get the byte-length of a file but this operation consumes more time than the open read and close operations. The readable file recycles the same file-descriptor and byte-length and while there is still a writable context attached, new writable contexts attaching keep the readable file open.
     </div>
 </div>
 
@@ -561,7 +562,7 @@ const server = new Server();
         </details>
     </ul>
     <div>
-        Use this method to add a new requestBodyParser. By default requestBodyParsers exist for content-type <code>"application/json"</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for content-type <code>"application/x-www-form-urlencoded"</code> that parses with <a href="https://nodejs.org/dist/latest-v16.x/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>.
+        Use this method to add a new requestBodyParser. By default requestBodyParsers exist for content-type <code>"application/json"</code> that parses with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse">JSON.parse</a> and for content-type <code>"application/x-www-form-urlencoded"</code> that parses with <a href="https://nodejs.org/dist/latest/docs/api/url.html#class-urlsearchparams">URLSearchParams</a>.
     </div>
 </div>
 
@@ -580,7 +581,7 @@ const server = new Server();
                 <code>byteLength</code> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Number_type">&lt;integer&gt;</a>
             </summary>
             <div>
-                A byteLength can be read from the <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_buf_length">length</a> property of a <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_class_buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest-v14.x/docs/api/buffer.html#buffer_static_method_buffer_bytelength_string_encoding">Buffer.byteLength<a>.
+                A byteLength can be read from the <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#buflength">length</a> property of a <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#class-buffer">Buffer</a> or can be returned from the static method <a href="https://nodejs.org/dist/latest/docs/api/buffer.html#static-method-bufferbytelengthstring-encoding">Buffer.byteLength<a>.
             </div>
         </details>
     </ul>
