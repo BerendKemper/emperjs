@@ -52,7 +52,6 @@ const server = new Server();
 
 <div>
     <h2>Class: <code>Server</code></h2>
-
     <ul><li>Extends: <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/http.html#class-httpserver">http.Server</a> | <a target="_blank" href="https://nodejs.org/dist/latest/docs/api/https.html#class-httpsserver">https.Server</a></li></ul>
 </div>
 
